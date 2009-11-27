@@ -1,5 +1,6 @@
 package oo2cad;
 
+import oo2cad.unzip.FileCreator;
 import oo2cad.unzip.Unzip;
 
 public class OO2CAD {
@@ -13,8 +14,7 @@ public class OO2CAD {
 		String datei = "h:\\openoffice.odg";
 		String destxml = "h:\\content.xml";
 		uz.fileExtract(datei,destxml);
-		//Test
-		
+		new FileCreator().returnFileObj(destxml);		
 		
 	}
 
