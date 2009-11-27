@@ -13,6 +13,7 @@ public class OO2CAD {
 		String datei = "h:\\openoffice.odg";
 		String destxml = "h:\\content.xml";
 		uz.fileExtract(datei,destxml);
+		//Test
 		
 		
 	}
