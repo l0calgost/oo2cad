@@ -21,9 +21,7 @@ public class XMLHandler extends DefaultHandler{
 		
 		for (int i = 0; i < attributes.getLength(); i++) {
 			
-			System.out.println(attributes.getQName(i));
-			System.out.println(attributes.getValue(i));
-			
+			System.out.println(attributes.getQName(i) + " = " + attributes.getValue(i));			
 		}
 	}
 	
