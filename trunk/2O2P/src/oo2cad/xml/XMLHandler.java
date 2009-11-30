@@ -25,9 +25,13 @@ public class XMLHandler extends DefaultHandler{
 			Rectangle rect = new Rectangle();
 		}
 		
+		/*
 		
-		
-		
+		private int getAttributesIntValue(String attribute)
+		{
+			return Float.
+		}
+		*/
 	}
 	
 }
