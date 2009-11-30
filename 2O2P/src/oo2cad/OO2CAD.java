@@ -13,18 +13,16 @@ public class OO2CAD {
 	 */
 	public static void main(String[] args) 
 	{
-		
 		//Configurations aus der config.properties auslesen
 		Config config = new Config();
 		
 		//aus der *.odg-Datei die content.xml holen
 		Unzip uz = new Unzip();
 		String datei = "h:\\openoffice.odg";
-		String destxml = "h:\\content.xml";
 
 		try 
 		{
-			File ooXmlContent = uz.extractFile(datei,destxml);
+			File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 			
 			//File an Parser übergeben
 			OOXMLParser parser = new OOXMLParser();
