@@ -1,8 +1,6 @@
 package oo2cad;
 
 import java.io.File;
-
-import oo2cad.unzip.FileCreator;
 import oo2cad.unzip.Unzip;
 
 public class OO2CAD {

@@ -18,16 +18,19 @@ public class Unzip
 	{
 		int fileLength = 0;
 		
+		//Datei in ausgabe schreiben
+		File ooXmlContent = new File(dest);
+		InputStream ooXmlContentIs = null;
+		
 		try
 		{
+			//Zip
 			ZipFile ooZipFile = new ZipFile(source);
 			Enumeration<? extends ZipEntry> ooZipEntrys = ooZipFile.entries();
 			
-			//Datei in ausgabe schreiben
-			File ooXmlContent = new File(dest);
-			InputStream ooXmlContentIs = null;
+			//File Schreiben
 			FileOutputStream ooXmlContentFo = new FileOutputStream(ooXmlContent);
-
+			
 			while(ooZipEntrys.hasMoreElements())
 			{
 				ZipEntry ooZipEntryInFile = ooZipEntrys.nextElement();
@@ -45,12 +48,12 @@ public class Unzip
 			{
 				ooXmlContentFo.write(buffer, 0, fileLength);
 			}
-			
-			return ooXmlContent;
-		}
+		}		
 		catch (IOException e) 
 		{
 			System.out.println("Entpacken fehlgeschlagen ... " + e.getMessage());
-		}		
+		}	
+		
+		return ooXmlContent;
 	}
 }
