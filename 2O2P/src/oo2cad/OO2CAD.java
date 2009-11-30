@@ -2,6 +2,7 @@ package oo2cad;
 
 import java.io.File;
 
+import oo2cad.config.Config;
 import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
 
@@ -12,6 +13,10 @@ public class OO2CAD {
 	 */
 	public static void main(String[] args) 
 	{
+		
+		//Configurations aus der config.properties auslesen
+		Config config = new Config();
+		
 		//aus der *.odg-Datei die content.xml holen
 		Unzip uz = new Unzip();
 		String datei = "h:\\openoffice.odg";
