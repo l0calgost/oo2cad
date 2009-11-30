@@ -14,7 +14,7 @@ public class Unzip
 	//Zip Buffer
 	private static final byte[] buffer = new byte[ 0xFFFF ]; 
 	
-	public void fileExtract(String source, String dest)
+	public File extractFile(String source, String dest)
 	{
 		int fileLength = 0;
 		
@@ -45,6 +45,8 @@ public class Unzip
 			{
 				ooXmlContentFo.write(buffer, 0, fileLength);
 			}
+			
+			return ooXmlContent;
 		}
 		catch (IOException e) 
 		{
