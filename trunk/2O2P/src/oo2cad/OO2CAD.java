@@ -3,7 +3,6 @@ package oo2cad;
 import java.io.File;
 
 import oo2cad.config.Config;
-import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
 
 public class OO2CAD {
@@ -14,19 +13,19 @@ public class OO2CAD {
 	public static void main(String[] args) 
 	{
 		//Configurations aus der config.properties auslesen
-		Config config = new Config();
+		new Config();
 		
 		//aus der *.odg-Datei die content.xml holen
-		Unzip uz = new Unzip();
+		//Unzip uz = new Unzip();
 		String datei = "h:\\openoffice.odg";
 
 		try 
 		{
-			File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
+			//File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 			
 			//File an Parser übergeben
 			OOXMLParser parser = new OOXMLParser();
-			parser.parseFile(ooXmlContent);
+			parser.parseFile(new File(Config.XML_FILE_NAME));
 		}
 		catch(Exception e) {
 			
