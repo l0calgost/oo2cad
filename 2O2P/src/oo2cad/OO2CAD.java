@@ -1,7 +1,9 @@
 package oo2cad;
 
 import java.io.File;
+
 import oo2cad.unzip.Unzip;
+import oo2cad.xml.OOXMLParser;
 
 public class OO2CAD {
 
@@ -10,10 +12,28 @@ public class OO2CAD {
 	 */
 	public static void main(String[] args) 
 	{
+		//aus der *.odg-Datei die content.xml holen
 		Unzip uz = new Unzip();
 		String datei = "h:\\openoffice.odg";
 		String destxml = "h:\\content.xml";
-		File ooXmlContent = uz.extractFile(datei,destxml);
+
+		try 
+		{
+			File ooXmlContent = uz.extractFile(datei,destxml);
+			
+			//File an Parser übergeben
+			OOXMLParser parser = new OOXMLParser();
+			parser.parseFile(ooXmlContent);
+		}
+		catch(Exception e) {
+			
+		}
+
+		
+
+		
+		
+
 	}
 
 }
