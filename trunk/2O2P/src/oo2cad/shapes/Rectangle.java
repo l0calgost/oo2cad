@@ -1,6 +1,6 @@
 package oo2cad.shapes;
 
-public class Rectangle extends MasterShape{
+public class Rectangle extends Shape{
 
 	public Rectangle()
 	{
