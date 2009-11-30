@@ -7,7 +7,7 @@ package oo2cad.shapes;
  * @author ahrensm
  *
  */
-public class MasterShape {
+public class Shape {
 
 	private float x;
 	private float y;
