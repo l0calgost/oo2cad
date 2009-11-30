@@ -1,6 +1,7 @@
 package oo2cad.xml;
 
 import oo2cad.config.Config;
+import oo2cad.shapes.Rectangle;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -21,10 +22,7 @@ public class XMLHandler extends DefaultHandler{
 		if(name.equals(Config.XML_TAG_RECT)) {
 			System.out.println(name);
 			
-			for (int i = 0; i < attributes.getLength(); i++) {
-				
-				System.out.println(attributes.getQName(i) + " = " + attributes.getValue(i));
-			}
+			Rectangle rect = new Rectangle();
 		}
 		
 		
