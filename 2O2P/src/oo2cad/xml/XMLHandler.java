@@ -1,5 +1,8 @@
 package oo2cad.xml;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import oo2cad.config.Config;
 import oo2cad.shapes.Rectangle;
 
@@ -21,17 +24,24 @@ public class XMLHandler extends DefaultHandler{
 		*/
 		if(name.equals(Config.XML_TAG_RECT)) {
 			System.out.println(name);
-			
+			getAttributesFloatValue(attributes.getValue(Config.XML_TAG_HEIGHT));
 			Rectangle rect = new Rectangle();
+		}		
+	}
+	
+	private float getAttributesFloatValue(String attribute)
+	{
+		float attributeValue = 0;
+		
+		Pattern pattern = Pattern.compile("[0-9]+[.]?[0-9]+?");
+		
+		Matcher matcher = pattern.matcher(attribute);
+		
+		while(matcher.find()){
+			System.out.println(matcher.group());
 		}
 		
-		/*
-		
-		private int getAttributesIntValue(String attribute)
-		{
-			return Float.
-		}
-		*/
+		return attributeValue;
 	}
 	
 }
