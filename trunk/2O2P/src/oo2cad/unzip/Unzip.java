@@ -1,6 +1,8 @@
 /*
  * Unzip 
- *
+ * Open Office
+ * Aus der *.odg Datei wird die Content.xml Datei enpackt.
+ * 
  */
 package oo2cad.unzip;
 
@@ -18,7 +20,7 @@ public class Unzip
 	{
 		int fileLength = 0;
 		
-		//Datei in ausgabe schreiben
+		//Datei in Ausgabe schreiben
 		File ooXmlContent = new File(dest);
 		InputStream ooXmlContentIs = null;
 		
@@ -33,6 +35,7 @@ public class Unzip
 			
 			while(ooZipEntrys.hasMoreElements())
 			{
+				//Elemente in der Zipdatei durchgehen
 				ZipEntry ooZipEntryInFile = ooZipEntrys.nextElement();
 				
 				//Content xml entpacken
@@ -54,6 +57,7 @@ public class Unzip
 			System.out.println("Entpacken fehlgeschlagen ... " + e.getMessage());
 		}	
 		
+		//Datei zurückliefern Typ:File
 		return ooXmlContent;
 	}
 }
