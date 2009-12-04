@@ -13,7 +13,7 @@ public class OO2CAD {
 	public static void main(String[] args) 
 	{
 		//Configurations aus der config.properties auslesen
-		new Config();
+		Config config = new Config();
 		
 		//aus der *.odg-Datei die content.xml holen
 		//Unzip uz = new Unzip();
@@ -24,7 +24,7 @@ public class OO2CAD {
 			//File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 			
 			//File an Parser übergeben
-			OOXMLParser parser = new OOXMLParser();
+			OOXMLParser parser = new OOXMLParser(config);
 			parser.parseFile(new File(Config.XML_FILE_NAME));
 		}
 		catch(Exception e) {
