@@ -7,9 +7,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import oo2cad.config.Config;
+
 import org.xml.sax.SAXException;
 
 public class OOXMLParser {
+	
+	private Config config;
+	
+	public OOXMLParser(Config config)
+	{
+		this.config = config;
+	}
 	
 	public void parseFile(File file) {
 
@@ -21,7 +30,7 @@ public class OOXMLParser {
 			SAXParser sp = spf.newSAXParser();
 
 			//parse the file and also register this class for call backs
-			sp.parse(file, new XMLHandler());
+			sp.parse(file, new XMLHandler(config));
 
 		}catch(SAXException se) {
 			se.printStackTrace();

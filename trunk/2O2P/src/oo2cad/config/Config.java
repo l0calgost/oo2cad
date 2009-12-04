@@ -18,6 +18,8 @@ public class Config {
 	public static String XML_TAG_Y;
 	public static String XML_TAG_WIDTH;
 	public static String XML_TAG_HEIGHT;
+	
+	private Properties configs;
 
 	public Config() {
 		readConfigs();
@@ -25,11 +27,10 @@ public class Config {
 
 	private void readConfigs() {
 
-		Properties configs = new Properties();
-
+		setConfigs(new Properties());
 		
 		try {
-			
+						
 			 InputStream stream = Config.class.getResourceAsStream("../../config.properties");
 			 
 			 configs.load(stream);
@@ -54,6 +55,14 @@ public class Config {
 		XML_TAG_WIDTH = configs.getProperty("xmlWidthTag");
 		XML_TAG_HEIGHT = configs.getProperty("xmlHeightTag");
 		
+	}
+	
+	public Properties getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(Properties properties) {
+		this.configs = properties;
 	}
 
 }
