@@ -15,6 +15,7 @@ public class XMLHandler extends DefaultHandler{
 	@Override
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException {
+		
 		/*
 		if(uri != "")
 		System.out.println(uri);
@@ -43,5 +44,4 @@ public class XMLHandler extends DefaultHandler{
 		
 		return attributeValue;
 	}
-	
 }
