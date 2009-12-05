@@ -10,14 +10,6 @@ import java.util.Properties;
  */
 public class Config {
 
-	public static String XML_FILE_NAME;
-	public static String XML_TAG_PAGE;
-	public static String XML_TAG_RECT;
-
-	public static String XML_TAG_X;
-	public static String XML_TAG_Y;
-	public static String XML_TAG_WIDTH;
-	public static String XML_TAG_HEIGHT;
 	
 	private Properties configs;
 
@@ -45,16 +37,6 @@ public class Config {
 			System.out.println("" + e.getMessage());
 			e.printStackTrace();
 		}
-
-		XML_FILE_NAME = configs.getProperty("xmlFileName");
-		XML_TAG_PAGE = configs.getProperty("xmlTagPage");
-		XML_TAG_RECT = configs.getProperty("rectangle");
-		
-		XML_TAG_X = configs.getProperty("xmlXTag");
-		XML_TAG_Y = configs.getProperty("xmlYTag");
-		XML_TAG_WIDTH = configs.getProperty("xmlWidthTag");
-		XML_TAG_HEIGHT = configs.getProperty("xmlHeightTag");
-		
 	}
 	
 	public Properties getConfigs() {
