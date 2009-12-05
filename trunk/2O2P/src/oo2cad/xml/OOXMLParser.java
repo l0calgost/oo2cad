@@ -13,11 +13,11 @@ import org.xml.sax.SAXException;
 
 public class OOXMLParser {
 	
-	private Config config;
+	private XMLHandler xmlHandler;
 	
 	public OOXMLParser(Config config)
 	{
-		this.config = config;
+		xmlHandler = new XMLHandler(config);
 	}
 	
 	public void parseFile(File file) {
@@ -30,7 +30,7 @@ public class OOXMLParser {
 			SAXParser sp = spf.newSAXParser();
 
 			//parse the file and also register this class for call backs
-			sp.parse(file, new XMLHandler(config));
+			sp.parse(file, xmlHandler);
 
 		}catch(SAXException se) {
 			se.printStackTrace();
@@ -39,6 +39,10 @@ public class OOXMLParser {
 		}catch (IOException ie) {
 			ie.printStackTrace();
 		}
+	}
+
+	public XMLHandler getXmlHandler() {
+		return xmlHandler;
 	}
 
 }
