@@ -10,7 +10,6 @@ import java.util.Properties;
  */
 public class Config {
 
-	
 	private Properties configs;
 
 	public Config() {
@@ -20,13 +19,14 @@ public class Config {
 	private void readConfigs() {
 
 		setConfigs(new Properties());
-		
+
 		try {
-						
-			 InputStream stream = Config.class.getResourceAsStream("../../config.properties");
-			 
-			 configs.load(stream);
-			 
+
+			InputStream stream = Config.class
+					.getResourceAsStream("../../config.properties");
+
+			configs.load(stream);
+
 			stream.close();
 		} catch (FileNotFoundException e) {
 			System.out
@@ -38,7 +38,7 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Properties getConfigs() {
 		return configs;
 	}
