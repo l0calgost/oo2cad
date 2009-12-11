@@ -13,6 +13,14 @@ public class ZeroPointConverter {
 
 	public void convertValues(Vector<Shape> shapeList)
 	{
-		
+		for (Shape shape : shapeList) {
+			//Neuen Y Wert setzen (Y + height = neuer Startpunkt unten links)
+			shape.setY(newZeroPoint(shape.getY(), shape.getHeight()));
+		}
+	}
+	
+	public float newZeroPoint(float y, float height)
+	{
+		return y+height;
 	}
 }
