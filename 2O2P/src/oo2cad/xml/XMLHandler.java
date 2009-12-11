@@ -53,7 +53,7 @@ public class XMLHandler extends DefaultHandler {
 	private float getAttributesFloatValue(String attribute) {
 		float attributeValue = 0;
 
-		Pattern pattern = Pattern.compile("[0-9]+[.]?[0-9]?+");
+		Pattern pattern = Pattern.compile("[+-]?[0-9]+[.]?[0-9]?+");
 
 		if (attribute != null) {
 			Matcher matcher = pattern.matcher(attribute);

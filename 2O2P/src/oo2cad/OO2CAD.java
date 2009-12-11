@@ -1,8 +1,13 @@
 package oo2cad;
 
 import java.io.File;
+import java.util.Vector;
 
+import oo2cad.cad.logic.CadHandler;
+import oo2cad.cad.objects.ObjectBox;
 import oo2cad.config.Config;
+import oo2cad.shapes.Shape;
+import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
 
 public class OO2CAD {
@@ -16,8 +21,8 @@ public class OO2CAD {
 		Config config = new Config();
 		
 		//aus der *.odg-Datei die content.xml holen
-		//Unzip uz = new Unzip();
 		String datei = "h:\\openoffice.odg";
+		File ooXmlContent = new Unzip().extractFile(datei, config.getConfigs().getProperty("xmlFileName"));
 
 		try 
 		{
@@ -25,7 +30,14 @@ public class OO2CAD {
 			
 			//File an Parser übergeben
 			OOXMLParser parser = new OOXMLParser(config);
-			parser.parseFile(new File(config.getConfigs().getProperty("xmlFileName")));
+			parser.parseFile(ooXmlContent/*new File(config.getConfigs().getProperty("xmlFileName"))*/);
+			
+			//CadHandler managed alle Convertierungsvorgänge in CAD
+			CadHandler cadHandler = new CadHandler(parser.getXmlHandler().getShapeList());
+			cadHandler.createCadCode();
+			
+			System.out.println("");
+			
 			
 		}
 		catch(Exception e) {
