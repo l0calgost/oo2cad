@@ -20,10 +20,13 @@ public class CadHandler
 		/*
 		 * ShapeObjecte auslesen und x,y Min,Max bestimmen für ObjectBox
 		 */
+		
 		ObjectBoxValueGetter obvg = new ObjectBoxValueGetter(shapeList);
 		obvg.objectboxValuesMaxMin();
 		//ObjetBox mit Werten befüllen
 		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax());
+		// Zero Punkt neu setzen (muss nach objectBox passieren, da sonst teile der Shapes abgeschnitten werden)
+		new ZeroPointConverter().convertValues(shapeList);
 		
 		
 	}
