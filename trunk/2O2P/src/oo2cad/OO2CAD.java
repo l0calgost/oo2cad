@@ -25,7 +25,8 @@ public class OO2CAD {
 			
 			//File an Parser übergeben
 			OOXMLParser parser = new OOXMLParser(config);
-			parser.parseFile(new File(Config.XML_FILE_NAME));
+			parser.parseFile(new File(config.getConfigs().getProperty("xmlFileName")));
+			
 		}
 		catch(Exception e) {
 			
