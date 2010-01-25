@@ -14,6 +14,4 @@ public class CadConstants {
 	public static final String DRAW_ABSOLUT = "da";
 	public static final String DRAW_ELLIPSE = "el";
 	public static final String DRAW_ELLIPSE_PART = "es";
-	
-	public static final String RETURN = "\n";
 }
