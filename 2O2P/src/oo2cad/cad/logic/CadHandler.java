@@ -34,9 +34,8 @@ public class CadHandler {
 //			}
 //		}
 		//ObjetBox mit Werten befüllen
-		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax());
-		
-		//TODO
+		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), shapeList);
+			
 	}
 
 	public Vector<Shape> getShapeList() {
