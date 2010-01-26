@@ -6,15 +6,22 @@
  */
 package oo2cad.unzip;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.log4j.Logger;
+
 public class Unzip 
 {
+	private Logger log = Logger.getLogger(Unzip.class);
+	
 	//Zip Buffer
-	private static final byte[] buffer = new byte[ 0xFFFF ]; 
+	private final byte[] buffer = new byte[ 0xFFFF ]; 
 	
 	public File extractFile(String source, String dest)
 	{
@@ -54,6 +61,7 @@ public class Unzip
 		}		
 		catch (IOException e) 
 		{
+			log.error("Fehler! Entpacken fehlgeschlagen! Grund: " + e.getMessage());
 			System.out.println("Entpacken fehlgeschlagen ... " + e.getMessage());
 		}	
 		

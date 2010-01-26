@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 public class OO2CAD {
 
-	static Logger log = Logger.getLogger(OO2CAD.class);
+	private static Logger log = Logger.getLogger(OO2CAD.class);
 	
 	/**
 	 * Initiale Klasse um das Programm zu starten. �ber <code>args</code> wird
@@ -26,6 +26,7 @@ public class OO2CAD {
 		Config config = new Config();
 
 		String datei = "h:\\openoffice.odg";
+		
 		log.info("OpenOffice datei eingelesen! Pfad: " + datei);
 		
 		// aus der *.odg-Datei die content.xml holen
@@ -41,8 +42,6 @@ public class OO2CAD {
 
 			parser.parseFile(ooXmlContent);
 
-			parser.parseFile(ooXmlContent);
-
 			Vector<Shape> shapeList = parser.getXmlHandler().getShapeList();
 			int i = 0;
 			i++;
@@ -52,10 +51,8 @@ public class OO2CAD {
 					.getShapeList());
 			cadHandler.createCadCode();
 
-			System.out.println("");
-
 		} catch (Exception e) {
-
+			log.error("Fehler! Parsen der XML-Datei fehlgeschlagen! Grund: " + e.getMessage());
 		}
 	}
 }

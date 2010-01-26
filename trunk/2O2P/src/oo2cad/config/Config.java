@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 /**
  * Config einlesen
  */
@@ -12,6 +14,8 @@ public class Config {
 
 	private Properties configs;
 
+	private Logger log = Logger.getLogger(Config.class);
+	
 	public Config() {
 		readConfigs();
 	}
@@ -29,11 +33,14 @@ public class Config {
 
 			stream.close();
 		} catch (FileNotFoundException e) {
+			
+			log.error("Fehler! Properties-Datei nicht gefunden! Grund: " + e.getMessage());
 			System.out
 					.println("Fehler! Properties-Datei nicht gefunden! Grund: "
 							+ e.getLocalizedMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
+			log.error(e.getMessage());
 			System.out.println("" + e.getMessage());
 			e.printStackTrace();
 		}

@@ -1,9 +1,10 @@
 package oo2cad.cad.logic;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Vector;
 
 import oo2cad.cad.objects.ObjectBox;
-import oo2cad.shapes.Rectangle;
 import oo2cad.shapes.Shape;
 
 public class CadHandler {
@@ -13,7 +14,7 @@ public class CadHandler {
 		this.shapeList = shapeList;
 	}
 
-	//
+	
 	public void createCadCode() {
 		
 		//Konvertierung der Koordinaten von OpenOffice (Nullpunkt links oben) zu CAD (Nullpunkt links unten)
@@ -34,8 +35,12 @@ public class CadHandler {
 //			}
 //		}
 		//ObjetBox mit Werten befüllen
+
 		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), shapeList);
-			
+		
+		CadCreator cadCreator = new CadCreator(objectBox);
+		cadCreator.createCADFile();
+					
 	}
 
 	public Vector<Shape> getShapeList() {
