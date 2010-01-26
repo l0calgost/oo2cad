@@ -37,33 +37,21 @@ public class XMLHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException {
 
+		if (insidePage && name.contains("draw:"))
+		{
+			name = name.replace("draw:", "");
+
+			Shape shape = createShapeByName(name, attributes);
+			
+			if (shape != null) {
+				shapeList.add(shape);
+			}
+		}
+		
 		if (name.contains("draw:page"))
 		{
-			if (insidePage)
-			{
-				name = name.replace("draw:", "");
-
-				Shape shape = createShapeByName(name, attributes);
-				
-				if (shape != null) {
-					shapeList.add(shape);
-				}
-			}
-			
 			insidePage = true;
 		}
-		else {
-			if (insidePage)
-			{
-				name = name.replace("draw:", "");
-
-				Shape shape = createShapeByName(name, attributes);
-				
-				if (shape != null) {
-					shapeList.add(shape);
-				}
-			}
-		}		
 	}
 
 	/**
