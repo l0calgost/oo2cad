@@ -14,11 +14,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class XMLHandler extends DefaultHandler {
 
-	//Instanzvariablen
+	// Instanzvariablen
 	private Config config;
 	private Vector<Shape> shapeList = new Vector<Shape>();
-	
-	//Konstruktor
+
+	// Konstruktor
 	public XMLHandler(Config config) {
 		this.config = config;
 	}
@@ -96,16 +96,27 @@ public class XMLHandler extends DefaultHandler {
 				shapeObject = (Shape) shapeObjectClass.newInstance();
 
 				try {
-					shapeObjectClass.getMethod("setName", String.class).invoke(shapeObject, attributes.getValue(0));
-					
-					shapeObjectClass.getMethod("setWidth", float.class).invoke(shapeObject,	getAttributesFloatValue(attributes.getValue(3)));
-					
-					shapeObjectClass.getMethod("setHeight", float.class).invoke(shapeObject, getAttributesFloatValue(attributes.getValue(4)));
-										
-					shapeObjectClass.getMethod("setX", float.class).invoke(shapeObject,	getAttributesFloatValue(attributes.getValue(5)));
+					shapeObjectClass.getMethod("setName", String.class).invoke(
+							shapeObject, attributes.getValue(0));
 
-					shapeObjectClass.getMethod("setY", float.class).invoke(shapeObject,	getAttributesFloatValue(attributes.getValue(6)));
-					
+					shapeObjectClass.getMethod("setWidth", float.class).invoke(
+							shapeObject,
+							getAttributesFloatValue(attributes.getValue(3)));
+
+					shapeObjectClass.getMethod("setHeight", float.class)
+							.invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes
+											.getValue(4)));
+
+					shapeObjectClass.getMethod("setX", float.class).invoke(
+							shapeObject,
+							getAttributesFloatValue(attributes.getValue(5)));
+
+					shapeObjectClass.getMethod("setY", float.class).invoke(
+							shapeObject,
+							getAttributesFloatValue(attributes.getValue(6)));
+
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (SecurityException e) {
