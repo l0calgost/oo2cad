@@ -8,15 +8,19 @@ import java.util.regex.Pattern;
 import oo2cad.config.Config;
 import oo2cad.shapes.Shape;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XMLHandler extends DefaultHandler {
 
+	private Logger log = Logger.getLogger(XMLHandler.class);
+	
 	// Instanzvariablen
 	private Config config;
 	private Vector<Shape> shapeList = new Vector<Shape>();
+	private boolean insidePage = false;
 
 	// Konstruktor
 	public XMLHandler(Config config) {
@@ -33,13 +37,33 @@ public class XMLHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException {
 
-		name = name.replace("draw:", "");
+		if (name.contains("draw:page"))
+		{
+			if (insidePage)
+			{
+				name = name.replace("draw:", "");
 
-		Shape shape = createShapeByName(name, attributes);
-
-		if (shape != null) {
-			shapeList.add(shape);
+				Shape shape = createShapeByName(name, attributes);
+				
+				if (shape != null) {
+					shapeList.add(shape);
+				}
+			}
+			
+			insidePage = true;
 		}
+		else {
+			if (insidePage)
+			{
+				name = name.replace("draw:", "");
+
+				Shape shape = createShapeByName(name, attributes);
+				
+				if (shape != null) {
+					shapeList.add(shape);
+				}
+			}
+		}		
 	}
 
 	/**
@@ -89,6 +113,7 @@ public class XMLHandler extends DefaultHandler {
 
 		Class shapeObjectClass;
 		try {
+						
 			shapeObjectClass = Class.forName("oo2cad.shapes."
 					+ config.getConfigs().getProperty(name));
 
@@ -118,26 +143,44 @@ public class XMLHandler extends DefaultHandler {
 							getAttributesFloatValue(attributes.getValue(6)));
 
 				} catch (IllegalArgumentException e) {
+					log.error("IllegalArgumentException! Grund: " + e.getMessage());
 					e.printStackTrace();
 				} catch (SecurityException e) {
+					log.error("SecurityException! Grund: " + e.getMessage());
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
+					log.error("IllegalAccessException! Grund: " + e.getMessage());
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
+					log.error("InvocationTargetException! Grund: " + e.getMessage());
 					e.printStackTrace();
 				} catch (NoSuchMethodException e) {
+					log.error("NoSuchMethodException! Grund: " + e.getMessage());
 					e.printStackTrace();
 				}
 			} catch (InstantiationException e1) {
+				log.error("InstantiationException! Grund: " + e1.getMessage());
 				e1.printStackTrace();
 			} catch (IllegalAccessException e1) {
+				log.error("IllegalAccessException! Grund: " + e1.getMessage());
 				e1.printStackTrace();
 			}
 
 		} catch (ClassNotFoundException e1) {
-
+			log.error("ClassNotFoundException! Grund: " + e1.getMessage());
+			e1.printStackTrace();
 		}
 
 		return shapeObject;
+	}
+
+	public boolean isInsidePage()
+	{
+		return insidePage;
+	}
+
+	public void setInsidePage(boolean insidePage)
+	{
+		this.insidePage = insidePage;
 	}
 }
