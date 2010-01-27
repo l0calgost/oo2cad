@@ -42,19 +42,25 @@ public class CadCreator
 			
 			for (Shape  shape : objectBox.getShape())
 			{
+				
+				bw.write(CadConstants.MOVE_ABSOLUT + " " + getShapeStartPoint(shape));
+				bw.newLine();
+				
 				if (shape instanceof Rectangle)
 				{
+					Rectangle rect = (Rectangle) shape;
 					System.out.println("Ich bin ein Quadrat");
+					
+					
+					bw.write(CadConstants.DRAW_ABSOLUT + " " + getLineEndPoint(rect));
+					bw.newLine();
 				}
 				
 				if (shape instanceof Circle)
 				{
 					System.out.println("Ich bin ein Kreis");
 				}
-				bw.write(CadConstants.MOVE_ABSOLUT + " " + shape.getX() + ", " + shape.getY());
-				bw.newLine();
-				bw.write(CadConstants.DRAW_ABSOLUT + " " + shape.getX() + shape.getWidth());
-				bw.newLine();
+				
 			}
 			bw.write(CadConstants.OBJECT_END);
 
@@ -67,6 +73,28 @@ public class CadCreator
 		{
 			log.error("Fehler beim Schreiben der CAD-Datei! Grund: " + e.getMessage());
 		}
+	}
+	
+	/**
+	 * Diese Methode nimmt über die getX- und getY- Methoden
+	 * den Startpunkt und liefert einen String mit folgendem Format:
+	 * 'x, y'
+	 * @param shape
+	 * @return
+	 */
+	private String getShapeStartPoint(Shape shape)
+	{
+		return shape.getX() + ", " + shape.getY();
+	}
+	
+	/**
+	 * Liefert den Enpunkt einer Linie eines Vierecks.
+	 * @param rect
+	 * @return
+	 */
+	private String getLineEndPoint(Rectangle rect)
+	{
+		return rect.getX() + rect.getWidth() + ", " + (rect.getY() + rect.getHeight());
 	}
 	
 }
