@@ -2,23 +2,21 @@ package oo2cad.cad.objects;
 
 import java.util.Vector;
 
-import oo2cad.shapes.Shape;
-
 public class ObjectBox 
 {
 	private float xMin;
 	private float xMax;
 	private float yMin;
 	private float yMax;
-	private Vector<Shape> shape;
+	private Vector<CadBaseObject> cadObjectList;
 	
-	public ObjectBox(float xMin, float xMax, float yMin, float yMax, Vector<Shape> shape)
+	public ObjectBox(float xMin, float xMax, float yMin, float yMax, Vector<CadBaseObject> cadObjectList)
 	{
 		this.xMin = xMin;
 		this.xMax = xMax;
 		this.yMin = yMin;
 		this.yMax = yMax;
-		this.shape = shape;
+		this.cadObjectList = cadObjectList;
 	}
 	
 	public float getxMin() {
@@ -45,12 +43,14 @@ public class ObjectBox
 	public void setyMax(float yMax) {
 		this.yMax = yMax;
 	}
-	public Vector<Shape> getShape()
+
+	public Vector<CadBaseObject> getCadObjectList()
 	{
-		return shape;
+		return cadObjectList;
 	}
-	public void setShape(Vector<Shape> shape)
+
+	public void setCadObjectList(Vector<CadBaseObject> cadObjectList)
 	{
-		this.shape = shape;
+		this.cadObjectList = cadObjectList;
 	}
 }
