@@ -47,7 +47,6 @@ public class OOXMLParser {
 			ie.printStackTrace();
 		}
 		
-		log.info("Es wurde(n) " + xmlHandler.getShapeList().size() + " Zeichenobjekte erstellt!");
 	}
 
 	public XMLHandler getXmlHandler() {
