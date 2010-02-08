@@ -37,19 +37,22 @@ public class OO2CAD {
 		try {
 			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 
-			// File an Parser �bergeben
+			// File an Parser uebergeben
 			OOXMLParser parser = new OOXMLParser(config);
 
 			parser.parseFile(ooXmlContent);
-
+			
+			log.info("Es wurde(n) " + parser.getXmlHandler().getShapeList().size() + " Zeichenobjekte erstellt!");
+			
 			Vector<Shape> shapeList = parser.getXmlHandler().getShapeList();
+			
 			int i = 0;
 			i++;
 
 			// CadHandler managed alle Convertierungsvorg�nge in CAD
-			CadHandler cadHandler = new CadHandler(parser.getXmlHandler()
-					.getShapeList());
+			CadHandler cadHandler = new CadHandler(shapeList);
 			cadHandler.createCadCode();
+			System.out.println("CAD-Code wurde erfolgreich erstellt!");
 
 		} catch (Exception e) {
 			log.error("Fehler! Parsen der XML-Datei fehlgeschlagen! Grund: " + e.getMessage());
