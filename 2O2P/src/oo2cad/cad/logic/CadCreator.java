@@ -5,8 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import oo2cad.cad.constants.CadConstants;
+import oo2cad.cad.objects.CadBaseObject;
+import oo2cad.cad.objects.CadBow;
+import oo2cad.cad.objects.CadLine;
 import oo2cad.cad.objects.ObjectBox;
-import oo2cad.shapes.Circle;
 import oo2cad.shapes.Rectangle;
 import oo2cad.shapes.Shape;
 
@@ -27,11 +29,11 @@ public class CadCreator
 		this.objectBox = box;
 	}
 	
-	public void createCADFile()
+	public void createCADFile(String filepath)
 	{
 		try
 		{
-			BufferedWriter bw = new BufferedWriter(new FileWriter("h:\\cad.vec"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
 			
 			bw.write(CadConstants.OBJECT_START + " obj1");
 			bw.newLine();
@@ -40,25 +42,25 @@ public class CadCreator
 			bw.write(CadConstants.COLOR + " 2");
 			bw.newLine();
 			
-			for (Shape  shape : objectBox.getShape())
+			for (CadBaseObject  cadObject : objectBox.getCadObjectList())
 			{
 				
-				bw.write(CadConstants.MOVE_ABSOLUT + " " + getShapeStartPoint(shape));
+				bw.write(CadConstants.MOVE_ABSOLUT + " " + cadObject.getStartX() + ", " + cadObject.getStartY());
 				bw.newLine();
 				
-				if (shape instanceof Rectangle)
+				if (cadObject instanceof CadLine)
 				{
-					Rectangle rect = (Rectangle) shape;
-					System.out.println("Ich bin ein Quadrat");
-					
-					
-					bw.write(CadConstants.DRAW_ABSOLUT + " " + getLineEndPoint(rect));
+					CadLine line = (CadLine) cadObject;
+					bw.write(CadConstants.DRAW_ABSOLUT + " " + line.getEndX() + ", " + line.getEndY());
 					bw.newLine();
+					
 				}
-				
-				if (shape instanceof Circle)
+				if (cadObject instanceof CadBow)
 				{
-					System.out.println("Ich bin ein Kreis");
+					CadBow bow = (CadBow) cadObject;
+					
+					bw.write(CadConstants.DRAW_ABSOLUT + " " + bow.getRadiusX() + ", " + bow.getRadiusY() + ", " + bow.getAngleStart() + ", " + bow.getAngleEnd());
+					bw.newLine();
 				}
 				
 			}
