@@ -166,7 +166,7 @@ public class XMLHandler extends DefaultHandler {
 				}
 
 			} catch (ClassNotFoundException e1) {
-				log.error("ClassNotFoundException! Grund: " + e1.getMessage());
+				log.error("ClassNotFoundException für folgenden Tag: '" + name + "'! Grund: " + e1.getMessage());
 				e1.printStackTrace();
 			}
 		//}
