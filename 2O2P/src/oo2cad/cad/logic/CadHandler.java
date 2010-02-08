@@ -1,14 +1,21 @@
 package oo2cad.cad.logic;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.util.Vector;
 
+import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.ObjectBox;
 import oo2cad.shapes.Shape;
 
+/**
+ * BasisKlasse für alle Cad-Aktionen. Diese Klasse wird von
+ * OO2CAD.java aufgerufen.
+ * @author ahrensm
+ *
+ */
 public class CadHandler {
+	
 	private Vector<Shape> shapeList;
+	private Vector<CadBaseObject> cadObjectList;
 
 	public CadHandler(Vector<Shape> shapeList) {
 		this.shapeList = shapeList;
@@ -27,19 +34,16 @@ public class CadHandler {
 		ObjectBoxValueGetter obvg = new ObjectBoxValueGetter(shapeList);
 		obvg.objectboxValuesMaxMin();
 
-//		for (Shape shape : shapeList) {
-//						
-//			if(shape instanceof Rectangle)
-//			{
-//				System.out.println(shape.getClass().getSimpleName());
-//			}
-//		}
+		//Mithilfe des CADConverters werden die Shape-Objekte in die
+		//fuer CAD-Code benötigten Linien und Boegen umgewandelt
+		CadConverter cadConverter = new CadConverter();
+		cadObjectList = cadConverter.convertShapes(shapeList);
+		
 		//ObjetBox mit Werten befüllen
-
-		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), shapeList);
+		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), cadObjectList);
 		
 		CadCreator cadCreator = new CadCreator(objectBox);
-		cadCreator.createCADFile();
+		cadCreator.createCADFile("h:\\cad.vec");
 					
 	}
 
