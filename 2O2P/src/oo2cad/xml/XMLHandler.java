@@ -100,64 +100,77 @@ public class XMLHandler extends DefaultHandler {
 		Shape shapeObject = null;
 
 		Class shapeObjectClass;
-		try {
-						
-			shapeObjectClass = Class.forName("oo2cad.shapes."
-					+ config.getConfigs().getProperty(name));
-
+		
 			try {
-				shapeObject = (Shape) shapeObjectClass.newInstance();
+				
+				shapeObjectClass = Class.forName("oo2cad.shapes."
+						+ config.getConfigs().getProperty(name));
 
 				try {
-					shapeObjectClass.getMethod("setName", String.class).invoke(
-							shapeObject, attributes.getValue(0));
+					shapeObject = (Shape) shapeObjectClass.newInstance();
+					/*
+					Ist das OpenOffice-Objekt eine Line, haben die Methoden nicht
+					den gleichen namen wie die get- bzw. set-Methoden angeben.
+					Es gibt folgende Zuordung:
+						- width  = x-Wert des Startpunkts
+						- height = y-Wert des Startpunkts
+						- x	     = x-Wert des Endpunkts
+						- y      = y-Wert des Endpunkts
+					Diese Zuordnung wird gemacht, dass die Erzeugung per
+					Reflection möglichst einfach ist.
+					*/
+					try {
+						shapeObjectClass.getMethod("setName", String.class).invoke(
+								shapeObject, attributes.getValue(0));
 
-					shapeObjectClass.getMethod("setWidth", float.class).invoke(
-							shapeObject,
-							getAttributesFloatValue(attributes.getValue(3)));
+						shapeObjectClass.getMethod("setWidth", float.class).invoke(
+								shapeObject,
+								getAttributesFloatValue(attributes.getValue(3)));
 
-					shapeObjectClass.getMethod("setHeight", float.class)
-							.invoke(
-									shapeObject,
-									getAttributesFloatValue(attributes
-											.getValue(4)));
+						shapeObjectClass.getMethod("setHeight", float.class)
+								.invoke(
+										shapeObject,
+										getAttributesFloatValue(attributes
+												.getValue(4)));
 
-					shapeObjectClass.getMethod("setX", float.class).invoke(
-							shapeObject,
-							getAttributesFloatValue(attributes.getValue(5)));
+						shapeObjectClass.getMethod("setX", float.class).invoke(
+								shapeObject,
+								getAttributesFloatValue(attributes.getValue(5)));
 
-					shapeObjectClass.getMethod("setY", float.class).invoke(
-							shapeObject,
-							getAttributesFloatValue(attributes.getValue(6)));
+						shapeObjectClass.getMethod("setY", float.class).invoke(
+								shapeObject,
+								getAttributesFloatValue(attributes.getValue(6)));
 
-				} catch (IllegalArgumentException e) {
-					log.error("IllegalArgumentException! Grund: " + e.getMessage());
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					log.error("SecurityException! Grund: " + e.getMessage());
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					log.error("IllegalAccessException! Grund: " + e.getMessage());
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					log.error("InvocationTargetException! Grund: " + e.getMessage());
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					log.error("NoSuchMethodException! Grund: " + e.getMessage());
-					e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						log.error("IllegalArgumentException! Grund: " + e.getMessage());
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						log.error("SecurityException! Grund: " + e.getMessage());
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						log.error("IllegalAccessException! Grund: " + e.getMessage());
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						log.error("InvocationTargetException! Grund: " + e.getMessage());
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						log.error("NoSuchMethodException! Grund: " + e.getMessage());
+						e.printStackTrace();
+					}
+				} catch (InstantiationException e1) {
+					log.error("InstantiationException! Grund: " + e1.getMessage());
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					log.error("IllegalAccessException! Grund: " + e1.getMessage());
+					e1.printStackTrace();
 				}
-			} catch (InstantiationException e1) {
-				log.error("InstantiationException! Grund: " + e1.getMessage());
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				log.error("IllegalAccessException! Grund: " + e1.getMessage());
+
+			} catch (ClassNotFoundException e1) {
+				log.error("ClassNotFoundException! Grund: " + e1.getMessage());
 				e1.printStackTrace();
 			}
-
-		} catch (ClassNotFoundException e1) {
-			log.error("ClassNotFoundException! Grund: " + e1.getMessage());
-			e1.printStackTrace();
-		}
+		//}
+	
 
 		return shapeObject;
 	}
