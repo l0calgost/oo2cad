@@ -1,6 +1,8 @@
 package oo2cad.xml;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,28 +31,29 @@ public class XMLHandler extends DefaultHandler {
 
 	@Override
 	/**
-	 * Holt die Attribute aus dem entpsrechenden XML-Tag über das jeweilige
-	 * XML-TAG
+	 * Holt die Attribute aus dem entpsrechenden XML-Tag ueber das jeweilige
+	 * XML-TAG. Dabei wird mittels Properties-Datei ueberprueft, ob es einen
+	 * Key für das entsprechende XML-Tag gibt. Gibt es eines wird ueber die
+	 * Key-Value-Referenz die entsprechende Klasse geladen. 
 	 * 
 	 * @see org.xml.sax.helpers.DefaultHandler.startElement
 	 */
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException {
 
-		if (insidePage && name.contains("draw:"))
-		{
-			name = name.replace("draw:", "");
-
-			Shape shape = createShapeByName(name, attributes);
-			
-			if (shape != null) {
-				shapeList.add(shape);
-			}
-		}
+		Enumeration<Object> en = config.getConfigs().keys();
 		
-		if (name.contains("draw:page"))
+		while (en.hasMoreElements())
 		{
-			insidePage = true;
+			if (name.contains((String) en.nextElement()))
+			{
+				name = name.replace("draw:", "");
+				Shape shape = createShapeByName(name, attributes);
+				
+				if (shape != null) {
+					shapeList.add(shape);
+				}
+			}
 		}
 	}
 
