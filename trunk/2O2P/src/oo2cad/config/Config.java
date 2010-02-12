@@ -16,29 +16,21 @@ public class Config {
 
 	private Logger log = Logger.getLogger(Config.class);
 	
-	public Config() {
+	public Config() throws IOException {
 		readConfigs();
 	}
 
-	private void readConfigs() {
+	private void readConfigs() throws FileNotFoundException{
 
 		setConfigs(new Properties());
 
 		try {
-
 			InputStream stream = Config.class
 					.getResourceAsStream("../../config.properties");
 
 			configs.load(stream);
 
 			stream.close();
-		} catch (FileNotFoundException e) {
-			
-			log.error("Fehler! Properties-Datei nicht gefunden! Grund: " + e.getMessage());
-			System.out
-					.println("Fehler! Properties-Datei nicht gefunden! Grund: "
-							+ e.getLocalizedMessage());
-			e.printStackTrace();
 		} catch (IOException e) {
 			log.error(e.getMessage());
 			System.out.println("" + e.getMessage());
