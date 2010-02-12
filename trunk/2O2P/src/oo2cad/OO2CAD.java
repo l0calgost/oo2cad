@@ -1,6 +1,7 @@
 package oo2cad;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
 import oo2cad.cad.logic.CadHandler;
@@ -15,15 +16,22 @@ public class OO2CAD {
 	private static Logger log = Logger.getLogger(OO2CAD.class);
 	
 	/**
-	 * Initiale Klasse um das Programm zu starten. �ber <code>args</code> wird
-	 * die *.odg-Datei �bergeben.
+	 * Initiale Klasse um das Programm zu starten.
 	 */
 	public static void main(String[] args) {
 		
 		//DOMConfigurator.configureAndWatch("/config/log4j.xml");
 		
 		// Configurations aus der config.properties auslesen
-		Config config = new Config();
+		Config config= null;
+		try
+		{
+			config = new Config();
+		}
+		catch (IOException e) {
+			log.error("Fehler! Konfigurationsdatei nicht gefunden!");
+		}
+		
 
 		String datei = "h:\\openoffice.odg";
 		
