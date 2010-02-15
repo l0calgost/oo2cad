@@ -115,10 +115,10 @@ public class XMLHandler extends DefaultHandler {
 					Ist das OpenOffice-Objekt eine Line, haben die Methoden nicht
 					den gleichen namen wie die get- bzw. set-Methoden angeben.
 					Es gibt folgende Zuordung:
-						- width  = x-Wert des Startpunkts
-						- height = y-Wert des Startpunkts
-						- x	     = x-Wert des Endpunkts
-						- y      = y-Wert des Endpunkts
+						- x1  	 = x-Wert des Startpunkts
+						- y1 	 = y-Wert des Startpunkts
+						- width  = x-Wert des Endpunkts
+						- height = y-Wert des Endpunkts
 					Diese Zuordnung wird gemacht, dass die Erzeugung per
 					Reflection möglichst einfach ist.
 					*/
@@ -126,23 +126,45 @@ public class XMLHandler extends DefaultHandler {
 						shapeObjectClass.getMethod("setName", String.class).invoke(
 								shapeObject, attributes.getValue(0));
 
-						shapeObjectClass.getMethod("setWidth", float.class).invoke(
-								shapeObject,
-								getAttributesFloatValue(attributes.getValue(3)));
+						if ("line".equals(name))
+						{
+							shapeObjectClass.getMethod("setWidth", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue("svg:x2")));
 
-						shapeObjectClass.getMethod("setHeight", float.class)
-								.invoke(
-										shapeObject,
-										getAttributesFloatValue(attributes
-												.getValue(4)));
+							shapeObjectClass.getMethod("setHeight", float.class).invoke(
+											shapeObject,
+											getAttributesFloatValue(attributes.getValue("svg:y2")));
+							
+							shapeObjectClass.getMethod("setX", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue("svg:x1")));
 
-						shapeObjectClass.getMethod("setX", float.class).invoke(
-								shapeObject,
-								getAttributesFloatValue(attributes.getValue(5)));
+							shapeObjectClass.getMethod("setY", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue("svg:y1")));
+						}
+						else
+						{
+							shapeObjectClass.getMethod("setWidth", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue("svg:width")));
 
-						shapeObjectClass.getMethod("setY", float.class).invoke(
-								shapeObject,
-								getAttributesFloatValue(attributes.getValue(6)));
+							shapeObjectClass.getMethod("setHeight", float.class)
+									.invoke(
+											shapeObject,
+											getAttributesFloatValue(attributes
+													.getValue("svg:height")));
+							
+							shapeObjectClass.getMethod("setX", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue(5)));
+
+							shapeObjectClass.getMethod("setY", float.class).invoke(
+									shapeObject,
+									getAttributesFloatValue(attributes.getValue(6)));
+						}
+						
 
 					} catch (IllegalArgumentException e) {
 						log.error("IllegalArgumentException! Grund: " + e.getMessage());
