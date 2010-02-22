@@ -31,11 +31,16 @@ public class OO2CAD {
 		catch (IOException e) {
 			log.error("Fehler! Konfigurationsdatei nicht gefunden!");
 		}
-		
 
-		String datei = "h:\\openoffice.odg";
+		//Setzen der benoetigten Variablen. Dies geschieht nachher alles ueber die Gui!
+		config.setSourceFilePath("h:\\openoffice.odg");
+		config.setDestFilePath("");//wird bisher noch statisch gesetzt
+		config.setScaleInc(1);
+		config.setScaleDec(1);
+		config.setOffSetWidth(0);
+		config.setOffSetHeight(0);
 		
-		log.info("OpenOffice datei eingelesen! Pfad: " + datei);
+		log.info("OpenOffice datei eingelesen! Pfad: " + config.getSourceFilePath());
 		
 		// aus der *.odg-Datei die content.xml holen
 
