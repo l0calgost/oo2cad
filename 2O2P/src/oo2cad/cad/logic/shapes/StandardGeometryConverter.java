@@ -16,20 +16,9 @@ public class StandardGeometryConverter
 {
 	public CadBaseObject[] convertLine(Line line)
 	{
-		/*
-		Ist das OpenOffice-Objekt eine Line, haben die Methoden nicht
-		den gleichen namen wie die get- bzw. set-Methoden angeben.
-		Es gibt folgende Zuordung:
-			- width  = x-Wert des Startpunkts 	(x1)
-			- height = y-Wert des Startpunkts 	(y1)
-			- x	     = x-Wert des Endpunkts		(x2)
-			- y      = y-Wert des Endpunkts		(y2)
-		Diese Zuordnung wird gemacht, dass die Erzeugung per
-		Reflection möglichst einfach ist.
-		*/
 		CadLine[] lineArray = new CadLine[1];
 		
-		CadLine cadLine = new CadLine(line.getWidth(), line.getY(), line.getX(), line.getHeight());
+		CadLine cadLine = new CadLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
 		lineArray[0] = cadLine;
 		
 		return lineArray;
