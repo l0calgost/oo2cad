@@ -76,27 +76,4 @@ public class CadCreator
 			log.error("Fehler beim Schreiben der CAD-Datei! Grund: " + e.getMessage());
 		}
 	}
-	
-	/**
-	 * Diese Methode nimmt über die getX- und getY- Methoden
-	 * den Startpunkt und liefert einen String mit folgendem Format:
-	 * 'x, y'
-	 * @param shape
-	 * @return
-	 */
-	private String getShapeStartPoint(Shape shape)
-	{
-		return shape.getX() + ", " + shape.getY();
-	}
-	
-	/**
-	 * Liefert den Enpunkt einer Linie eines Vierecks.
-	 * @param rect
-	 * @return
-	 */
-	private String getLineEndPoint(Rectangle rect)
-	{
-		return rect.getX() + rect.getWidth() + ", " + (rect.getY() + rect.getHeight());
-	}
-	
 }
