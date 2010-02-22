@@ -25,7 +25,7 @@ public class CadHandler {
 	public void createCadCode() {
 		
 		//Konvertierung der Koordinaten von OpenOffice (Nullpunkt links oben) zu CAD (Nullpunkt links unten)
-		new ZeroPointConverter().convertValues(shapeList);
+		//new ZeroPointConverter().convertValues(shapeList);
 		
 		/*
 		 * ShapeObjecte auslesen und x,y Min,Max bestimmen für ObjectBox
