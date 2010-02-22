@@ -1,6 +1,6 @@
 package oo2cad.shapes;
 
-public class Ellipse extends Shape
+public class Ellipse extends AdvancedShape
 {
 
 }

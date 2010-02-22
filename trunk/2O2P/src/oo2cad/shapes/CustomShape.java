@@ -1,6 +1,6 @@
 package oo2cad.shapes;
 
-public class CustomShape extends Shape
+public class CustomShape extends AdvancedShape
 {
 
 }
