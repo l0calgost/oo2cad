@@ -1,5 +1,6 @@
 package oo2cad.shapes;
 
-public class Line extends Shape
+public class Line extends SimpleShape 
 {
+	
 }

@@ -1,6 +1,6 @@
 package oo2cad.shapes;
 
-public class Measure extends Shape
+public class Measure extends SimpleShape
 {
 
 }
