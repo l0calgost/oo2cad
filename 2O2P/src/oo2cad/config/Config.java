@@ -13,7 +13,15 @@ import org.apache.log4j.Logger;
 public class Config {
 
 	private Properties configs;
-
+	
+	private float scaleInc;
+	private float scaleDec;
+	private float offSetWidth;
+	private float offSetHeight;
+	
+	private String destFilePath;
+	private String sourceFilePath;
+	
 	private Logger log = Logger.getLogger(Config.class);
 	
 	public Config() throws IOException {
@@ -44,6 +52,61 @@ public class Config {
 
 	public void setConfigs(Properties properties) {
 		this.configs = properties;
+	}
+
+	public float getScale()
+	{
+		return scaleInc / scaleDec;
+	}
+	
+	public void setScaleInc(float scaleInc)
+	{
+		this.scaleInc = scaleInc;
+	}
+
+	public void setScaleDec(float scaleDec)
+	{
+		this.scaleDec = scaleDec;
+	}
+
+	public float getOffSetWidth()
+	{
+		return offSetWidth;
+	}
+
+	public void setOffSetWidth(float offSetWidth)
+	{
+		this.offSetWidth = offSetWidth;
+	}
+
+	public float getOffSetHeight()
+	{
+		return offSetHeight;
+	}
+
+	public void setOffSetHeight(float offSetHeight)
+	{
+		this.offSetHeight = offSetHeight;
+	}
+
+	public String getDestFilePath()
+	{
+		return destFilePath;
+	}
+
+	public void setDestFilePath(String destFilePath)
+	{
+		this.destFilePath = destFilePath;
+	}
+
+	public String getSourceFilePath()
+	{
+		return sourceFilePath;
+	}
+
+	public void setSourceFilePath(String sourceFilePath)
+	{
+		this.sourceFilePath = sourceFilePath;
 	}
 
 }
