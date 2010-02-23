@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import oo2cad.cad.logic.shapes.StandardGeometryConverter;
 import oo2cad.cad.objects.CadBaseObject;
-import oo2cad.cad.objects.CadLine;
 import oo2cad.shapes.Line;
 import oo2cad.shapes.Rectangle;
 import oo2cad.shapes.Shape;
@@ -28,17 +27,6 @@ public class CadConverter
 			
 			if (shape instanceof Line)
 			{
-				/*
-				Ist das OpenOffice-Objekt eine Line, haben die Methoden nicht
-				den gleichen namen wie die get- bzw. set-Methoden angeben.
-				Es gibt folgende Zuordung:
-					- width  = x-Wert des Startpunkts
-					- height = y-Wert des Startpunkts
-					- x	     = x-Wert des Endpunkts
-					- y      = y-Wert des Endpunkts
-				Diese Zuordnung wird gemacht, dass die Erzeugung per
-				Reflection möglichst einfach ist.
-				*/
 				objectArray = stageco.convertLine((Line) shape);	
 			}
 			
@@ -58,7 +46,4 @@ public class CadConverter
 		
 		return cadShapeList;
 	}
-		
-	
-
 }
