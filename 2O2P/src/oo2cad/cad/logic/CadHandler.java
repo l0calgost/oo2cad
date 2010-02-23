@@ -33,7 +33,12 @@ public class CadHandler {
 		
 		ObjectBoxValueGetter obvg = new ObjectBoxValueGetter(shapeList);
 		obvg.objectboxValuesMaxMin();
-
+		
+		//Hier werden die einzelnen Shapes von der fixen Lage geloest
+		//und relativ zum Bezugspunkt angegeben
+		CoordinateConverter coco = new CoordinateConverter();
+		
+		
 		//Mithilfe des CADConverters werden die Shape-Objekte in die
 		//fuer CAD-Code benötigten Linien und Boegen umgewandelt
 		CadConverter cadConverter = new CadConverter();
