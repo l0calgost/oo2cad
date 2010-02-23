@@ -47,13 +47,24 @@ public class XMLHandler extends DefaultHandler
 
 		Enumeration<Object> en = config.getConfigs().keys();
 
+		float scale = config.getScale();
+		
 		while (en.hasMoreElements())
 		{
 			if (name.contains((String) en.nextElement()))
 			{
 				name = name.replace("draw:", "");
-				Shape shape = createShapeByName(name, attributes);
-
+				
+				Shape shape = createShapeByName(name);
+								
+				if (shape instanceof SimpleShape)
+				{
+					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
+				}
+				if (shape instanceof AdvancedShape)
+				{
+					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
+				}
 				if (shape != null)
 				{
 					shapeList.add(shape);
@@ -99,155 +110,81 @@ public class XMLHandler extends DefaultHandler
 	}
 
 	/**
-	 * Erstellt aus dem übergebenen Namen und den Attributen per Reflection das
+	 * Erstellt aus dem übergebenen Namen per Reflection das
 	 * entsprechende Shape-Objekt.
 	 * 
 	 * @param name
 	 *            der Name des XML-Tags
-	 * @param attributes
-	 *            die Attribute des XML-Tags
 	 * @return das mit Attributen versorgte Shape-Objekt
 	 */
-	private Shape createShapeByName(String name, Attributes attributes) {
-		Shape shapeObject = null;
-
-		Class shapeObjectClass;
+	private Shape createShapeByName(String name) {
 		
+		Shape shapeObject = null;
+						
 			try {
 				
-				shapeObjectClass = Class.forName("oo2cad.shapes."
+				Class shapeObjectClass = Class.forName("oo2cad.shapes."
 						+ config.getConfigs().getProperty(name));
-
-				Class objectSuperClass = shapeObjectClass.getSuperclass();
 				
-				//shapeObject = (Shape) shapeObjectClass.newInstance();
+				shapeObject = (Shape) shapeObjectClass.newInstance();
 				
-				if (objectSuperClass == SimpleShape.class)
-				{
-					shapeObject = fillSimpleLineShapeWithValues(shapeObjectClass, name, attributes);
-				}
 				
-				if (objectSuperClass == AdvancedShape.class)
-				{
-					shapeObject = fillAdvancedShapeWithValues(shapeObjectClass, name, attributes);
-				}
-				
-			} catch (ClassNotFoundException e1) {
-				log.error("ClassNotFoundException für folgenden Tag: '" + name + "'! Grund: " + e1.getMessage());
-				e1.printStackTrace();
-			}
-	
+			} catch (ClassNotFoundException e) {
+				log.error("ClassNotFoundException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
+				e.printStackTrace();
+			} 
+			catch (InstantiationException e)
+			{
+				log.error("InstantiationException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
+				e.printStackTrace();
+			} 
+			catch (IllegalAccessException e)
+			{
+				log.error("IllegalAccessException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
+				e.printStackTrace();
+			} 
+		
 		return shapeObject;
 	}
 
-	private Shape fillSimpleLineShapeWithValues(Class shapeObjectClass, String name, Attributes attributes)
+	/**
+	 * Methode um SimpleShapes mit Werten zu befuellen
+	 * @param shape das zu befuellende SimpleShape-Objekt
+	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
+	 * @param scale der zu multiplizierende Maßstab
+	 */
+	private void fillSimpleLineShapeWithValues(SimpleShape shape, Attributes attributes, float scale)
 	{
-		Shape shapeObject = null;
+		float startX = getAttributesFloatValue(attributes.getValue("svg:x1")) * scale;
+		float startY = getAttributesFloatValue(attributes.getValue("svg:y1")) * scale;
+		float endX   = getAttributesFloatValue(attributes.getValue("svg:x2")) * scale;
+		float endY   = getAttributesFloatValue(attributes.getValue("svg:y2")) * scale;
 		
-		/*
-		 * Ist das OpenOffice-Objekt eine Line, haben die Methoden nicht den
-		 * gleichen namen wie die get- bzw. set-Methoden angeben. Es gibt
-		 * folgende Zuordung: - x1 = x-Wert des Startpunkts - y1 = y-Wert des
-		 * Startpunkts - width = x-Wert des Endpunkts - height = y-Wert des
-		 * Endpunkts Diese Zuordnung wird gemacht, dass die Erzeugung per
-		 * Reflection möglichst einfach ist.
-		 */
-		try {
-			shapeObject = (Shape) shapeObjectClass.newInstance();
-			
-			shapeObjectClass.getMethod("setName", String.class).invoke(
-					shapeObject, attributes.getValue(0));
-
-			
-				shapeObjectClass.getMethod("setStartX", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:x1")));
-
-				shapeObjectClass.getMethod("setStartY", float.class).invoke(
-								shapeObject,
-								getAttributesFloatValue(attributes.getValue("svg:y1")));
-				
-				shapeObjectClass.getMethod("setEndX", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:x2")));
-
-				shapeObjectClass.getMethod("setEndY", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:y2")));
-				
-		} catch (IllegalArgumentException e) {
-			log.error("IllegalArgumentException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			log.error("SecurityException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			log.error("IllegalAccessException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			log.error("InvocationTargetException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			log.error("NoSuchMethodException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		}
-		catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-	
-		return shapeObject;
+		shape.setName(attributes.getValue(0));
+		shape.setStartX(startX);
+		shape.setStartY(startY);
+		shape.setEndX(endX);
+		shape.setEndY(endY);
 	}
 
-	private Shape fillAdvancedShapeWithValues(Class shapeObjectClass, String name, Attributes attributes)
-	{
-		Shape shapeObject = null;
+	/**
+	 * Methode um AdvancedShapes mit Werten zu befuellen
+	 * @param shape das zu befuellende AdvancedShape-Objekt
+	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
+	 * @param scale der zu multiplizierende Maßstab
+	 */
+	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes, float scale)
+	{	
+		float x      = getAttributesFloatValue(attributes.getValue("svg:x")) * scale;
+		float y      = getAttributesFloatValue(attributes.getValue("svg:y")) * scale;
+		float width  = getAttributesFloatValue(attributes.getValue("svg:width")) * scale;
+		float height = getAttributesFloatValue(attributes.getValue("svg:height")) * scale;
 		
-		try {
-			shapeObject = (Shape) shapeObjectClass.newInstance();
-			
-			shapeObjectClass.getMethod("setName", String.class).invoke(
-					shapeObject, attributes.getValue(0));
-
-			
-				shapeObjectClass.getMethod("setWidth", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:width")));
-
-				shapeObjectClass.getMethod("setHeight", float.class).invoke(
-								shapeObject,
-								getAttributesFloatValue(attributes.getValue("svg:height")));
-				
-				shapeObjectClass.getMethod("setX", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:x")));
-
-				shapeObjectClass.getMethod("setY", float.class).invoke(
-						shapeObject,
-						getAttributesFloatValue(attributes.getValue("svg:y")));
-				
-		} catch (IllegalArgumentException e) {
-			log.error("IllegalArgumentException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			log.error("SecurityException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			log.error("IllegalAccessException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			log.error("InvocationTargetException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			log.error("NoSuchMethodException! Grund: " + e.getMessage());
-			e.printStackTrace();
-		}
-		catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-	
-		return shapeObject;
+		shape.setName(attributes.getValue(0));
+		shape.setX(x);
+		shape.setY(y);
+		shape.setWidth(width);
+		shape.setHeight(height);
 	}
 
 	public boolean isInsidePage()
