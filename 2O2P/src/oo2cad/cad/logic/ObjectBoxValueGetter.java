@@ -6,7 +6,10 @@
 package oo2cad.cad.logic;
 
 import java.util.Vector;
+
+import oo2cad.shapes.AdvancedShape;
 import oo2cad.shapes.Shape;
+import oo2cad.shapes.SimpleShape;
 
 public class ObjectBoxValueGetter 
 {
@@ -29,28 +32,67 @@ public class ObjectBoxValueGetter
 	 */	
 	public void objectboxValuesMaxMin()
 	{
-		for (Shape shape : getShapeList()) 
+		//Shapes durchlaufen
+		for(int i = 0; i< shapeList.size(); i++)
 		{
-			//XMIN
-			if(shape.getX() < xMin)
+			//Unterscheidung Simple- und Advanced-Shape
+			if(shapeList.elementAt(i) instanceof AdvancedShape)
 			{
-				setxMin(shape.getX());
+				AdvancedShape ad = (AdvancedShape) shapeList.elementAt(i);
+				setMinValues(ad.getX(), ad.getY());
+				setMaxValuesAdvancedShapes(ad.getX(), ad.getY(), ad.getWidth(), ad.getHeight());				
 			}
-			//YMIN
-			if(shape.getY() < yMin)
+			else if(shapeList.elementAt(i) instanceof SimpleShape)
 			{
-				setyMin(shape.getY());
-			}
-			//XMAX
-			if(getMaxValue(shape.getX(), shape.getWidth()) > xMax)
-			{
-				setxMax(getMaxValue(shape.getX(), shape.getWidth()));
-			}
-			//YMAX
-			if(getMaxValue(shape.getY(), shape.getHeight()) > yMax)
-			{
-				setyMax(getMaxValue(shape.getY(), shape.getHeight()));
-			}			
+				//Jeder wert der SimpleShapes muss einzeln betrachtet werden
+				SimpleShape sS = (SimpleShape) shapeList.elementAt(i);
+				setMinValues(sS.getStartX(), sS.getStartY());
+				setMinValues(sS.getEndX(), sS.getEndY());
+				setMaxValuesSimpleShapes(sS.getStartX(), sS.getStartY());
+				setMaxValuesSimpleShapes(sS.getEndX(), sS.getEndY());
+			}	
+		}
+	}
+	
+	private void setMaxValuesAdvancedShapes(float maxX, float maxY, float width, float height)
+	{
+		//XMAX
+		if((getMaxValue(maxX, width)) > xMax)
+		{
+			setxMax(getMaxValue(maxX, width));
+		}
+		//YMAX
+		if((getMaxValue(maxY, height)) > yMax)
+		{
+			setyMax(getMaxValue(maxY, height));
+		}
+	}
+	
+	private void setMaxValuesSimpleShapes(float maxX, float maxY)
+	{
+		//XMAX
+		if(maxX > xMax)
+		{
+			setxMax(maxX);
+		}
+		//YMAX
+		if(maxY > yMax)
+		{
+			setyMax(maxY);
+		}
+	}
+	
+	private void setMinValues(float minX, float minY)
+	{
+		//XMIN
+		if(minX < xMin)
+		{
+			setxMin(minX);
+		}
+		//YMIN
+		if(minY < yMin)
+		{
+			setyMin(minY);
 		}
 	}
 	
