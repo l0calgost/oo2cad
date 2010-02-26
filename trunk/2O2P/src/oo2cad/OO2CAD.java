@@ -23,10 +23,10 @@ public class OO2CAD {
 		//DOMConfigurator.configureAndWatch("/config/log4j.xml");
 		
 		// Configurations aus der config.properties auslesen
-		Config config= null;
+		Config config= Config.getInstance();
 		try
 		{
-			config = new Config();
+			config.readConfigs();
 		}
 		catch (IOException e) {
 			log.error("Fehler! Konfigurationsdatei nicht gefunden!");
