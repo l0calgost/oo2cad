@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.ObjectBox;
+import oo2cad.config.Config;
 import oo2cad.shapes.Shape;
 
 /**
@@ -34,18 +35,21 @@ public class CadHandler {
 		ObjectBoxValueGetter obvg = new ObjectBoxValueGetter(shapeList);
 		obvg.objectboxValuesMaxMin();
 		
+		//ObjetBox mit Werten befüllen
+		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), null);
+		
 		//Hier werden die einzelnen Shapes von der fixen Lage geloest
 		//und relativ zum Bezugspunkt angegeben
-		CoordinateConverter coco = new CoordinateConverter();
-		
+		CoordinateConverter coco = new CoordinateConverter(Config.getInstance());
+		coco.convertToRelative(objectBox.getxMin(), objectBox.getyMin(), shapeList);
 		
 		//Mithilfe des CADConverters werden die Shape-Objekte in die
 		//fuer CAD-Code benötigten Linien und Boegen umgewandelt
 		CadConverter cadConverter = new CadConverter();
 		cadObjectList = cadConverter.convertShapes(shapeList);
 		
-		//ObjetBox mit Werten befüllen
-		ObjectBox objectBox = new ObjectBox(obvg.getxMin(), obvg.getxMax(), obvg.getyMin(), obvg.getyMax(), cadObjectList);
+		//cadListe der Objektbox hinzufuegen
+		objectBox.setCadObjectList(cadObjectList);
 		
 		CadCreator cadCreator = new CadCreator(objectBox);
 		cadCreator.createCADFile("h:\\cad.vec");
