@@ -7,6 +7,7 @@ import java.util.Vector;
 import oo2cad.cad.logic.CadHandler;
 import oo2cad.config.Config;
 import oo2cad.shapes.Shape;
+import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
 
 import org.apache.log4j.Logger;
@@ -44,8 +45,10 @@ public class OO2CAD {
 		
 		// aus der *.odg-Datei die content.xml holen
 
-		//Unzip uz = new Unzip();
-		File ooXmlContent = new File(config.getConfigs().getProperty("xmlFileName"));//uz.extractFile(datei, config.getConfigs().getProperty("xmlFileName"));
+		Unzip uz = new Unzip();
+		
+		//File ooXmlContent = new File(config.getConfigs().getProperty("xmlFileName"));
+		File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getConfigs().getProperty("xmlFileName"));
 
 		try {
 			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);

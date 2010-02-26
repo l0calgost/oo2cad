@@ -45,7 +45,7 @@ public class CadConverter
 			}
 			if(shape instanceof Ellipse)
 			{
-				//objectArray = engeco;
+				objectArray = engeco.convertEllipse((Ellipse) shape);
 			}
 			if(shape instanceof Path)
 			{
