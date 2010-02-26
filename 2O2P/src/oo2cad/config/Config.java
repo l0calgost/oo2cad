@@ -16,8 +16,8 @@ public class Config {
 	
 	private float scaleInc;
 	private float scaleDec;
-	private float offSetWidth;
-	private float offSetHeight;
+	private float offSetX;
+	private float offSetY;
 	
 	private String destFilePath;
 	private String sourceFilePath;
@@ -69,26 +69,6 @@ public class Config {
 		this.scaleDec = scaleDec;
 	}
 
-	public float getOffSetWidth()
-	{
-		return offSetWidth;
-	}
-
-	public void setOffSetWidth(float offSetWidth)
-	{
-		this.offSetWidth = offSetWidth;
-	}
-
-	public float getOffSetHeight()
-	{
-		return offSetHeight;
-	}
-
-	public void setOffSetHeight(float offSetHeight)
-	{
-		this.offSetHeight = offSetHeight;
-	}
-
 	public String getDestFilePath()
 	{
 		return destFilePath;
@@ -107,6 +87,26 @@ public class Config {
 	public void setSourceFilePath(String sourceFilePath)
 	{
 		this.sourceFilePath = sourceFilePath;
+	}
+
+	public float getOffSetX()
+	{
+		return offSetX;
+	}
+
+	public void setOffSetX(float offSetX)
+	{
+		this.offSetX = offSetX;
+	}
+
+	public float getOffSetY()
+	{
+		return offSetY;
+	}
+
+	public void setOffSetY(float offSetY)
+	{
+		this.offSetY = offSetY;
 	}
 
 }
