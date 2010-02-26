@@ -33,13 +33,13 @@ public class CoordinateConverter
 	}
 	
 	/**
-	 * Methode um die einzelnen Werte relativ zum Bezugsbunkt zu 
-	 * berechnen. Dem Bezugspunkt wird noch das Offset aus der
-	 * Config hinzugerechnet
+	 * Methode um die einzelnen Werte relativ zum Bezugspunkt zu 
+	 * berechnen. Der Bezugspunkt ist dabei die linke untere Ecke der ObjectBox.
+	 * Allen Punkten wird noch das Offset aus der Config hinzugerechnet.
 	 * @param box die ObjektBox
 	 * @param shapeList die Liste mit Shape-Objekten
 	 */
-	public Vector<Shape> convertToRelative(ObjectBox box, Vector<Shape> shapeList)
+	public Vector<Shape> convertObjectsToRelativePosition(ObjectBox box, Vector<Shape> shapeList)
 	{
 		this.xReference = box.getxMin();
 		this.yReference = box.getyMin();
@@ -58,10 +58,8 @@ public class CoordinateConverter
 		}
 		
 		//Offset zu objectbox hinzurechnen
-		box.setxMax(box.getxMax() + config.getOffSetX());
-		box.setxMin(box.getxMin() + config.getOffSetX());
-		box.setyMax(box.getyMax() + config.getOffSetY());
-		box.setyMin(box.getyMin() + config.getOffSetY());
+		setObjectBoxValues(box);
+		
 		
 		return shapeList;
 	}
@@ -77,6 +75,14 @@ public class CoordinateConverter
 	private void setAvancedRelativeValues(AdvancedShape shape)
 	{
 		shape.setX(Math.abs(xReference - shape.getX()) + offSetX);
-		shape.setY(Math.abs(xReference - shape.getX()) + offSetX);
+		shape.setY(Math.abs(yReference - shape.getY()) + offSetY);
+	}
+	
+	private void setObjectBoxValues(ObjectBox box)
+	{
+		box.setxMax(Math.abs(box.getxMax() - box.getxMin()) + offSetX);
+		box.setyMax(Math.abs(box.getyMax() - box.getyMin()) + offSetY);
+		box.setxMin(offSetX);
+		box.setyMin(offSetY);
 	}
 }
