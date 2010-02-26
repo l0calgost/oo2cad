@@ -29,6 +29,16 @@ public class ObjectBoxValueGetter
 	/**
 	 * XMax, YMax, XMin, YMin
 	 * Wert bestimmung für die ObjektBox
+	 * 
+	 * Logic:
+	 * xMin alt wird als xMin neu gesetzt (x bleib gleich)
+	 * xMax alt wird als xMax neu gesetzt (x bleibt gleich)
+	 * yMin alt wird als yMax gesetzt, da die Logic in CAD sich von OO unterscheidet (Start Punkt)
+	 * yMax alt wird als yMin gesetzt, da die Logic in CAD sich von OO unterscheidet (Start Punkt)
+	 * 
+	 * Vorgehen:
+	 * maximal und minimal werte werden gesucht und in die jeweiligen max und min werte geschrieben
+	 * 
 	 */	
 	public void objectboxValuesMaxMin()
 	{
@@ -64,7 +74,7 @@ public class ObjectBoxValueGetter
 		//YMAX
 		if((getMaxValue(maxY, height)) > yMax)
 		{
-			setyMax(getMaxValue(maxY, height));
+			setyMin(getMaxValue(maxY, height));
 		}
 	}
 	
@@ -78,7 +88,7 @@ public class ObjectBoxValueGetter
 		//YMAX
 		if(maxY > yMax)
 		{
-			setyMax(maxY);
+			setyMin(maxY);
 		}
 	}
 	
@@ -92,7 +102,7 @@ public class ObjectBoxValueGetter
 		//YMIN
 		if(minY < yMin)
 		{
-			setyMin(minY);
+			setyMax(minY);
 		}
 	}
 	
