@@ -41,8 +41,8 @@ public class CadHandler {
 		
 		//Hier werden die einzelnen Shapes von der fixen Lage geloest
 		//und relativ zum Bezugspunkt angegeben
-		CoordinateConverter coco = new CoordinateConverter(Config.getInstance());
-		coco.convertToRelative(objectBox.getxMin(), objectBox.getyMin(), shapeList);
+		CoordinateConverter coco = new CoordinateConverter(config);
+		coco.convertToRelative(objectBox, shapeList);
 		
 		//Mithilfe des CADConverters werden die Shape-Objekte in die
 		//fuer CAD-Code benötigten Linien und Boegen umgewandelt
@@ -51,12 +51,7 @@ public class CadHandler {
 		
 		//cadListe der Objektbox hinzufuegen
 		objectBox.setCadObjectList(cadObjectList);
-		//Offset zu objectbox hinzurechnen
-		objectBox.setxMax(objectBox.getxMax() + config.getOffSetX());
-		objectBox.setxMin(objectBox.getxMin() + config.getOffSetX());
-		objectBox.setyMax(objectBox.getyMax() + config.getOffSetY());
-		objectBox.setyMin(objectBox.getyMin() + config.getOffSetY());
-		
+				
 		CadCreator cadCreator = new CadCreator(objectBox);
 		cadCreator.createCADFile("h:\\cad.vec");
 					
