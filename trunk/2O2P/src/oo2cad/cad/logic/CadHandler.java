@@ -42,7 +42,7 @@ public class CadHandler {
 		//Hier werden die einzelnen Shapes von der fixen Lage geloest
 		//und relativ zum Bezugspunkt angegeben
 		CoordinateConverter coco = new CoordinateConverter(config);
-		coco.convertToRelative(objectBox, shapeList);
+		coco.convertObjectsToRelativePosition(objectBox, shapeList);
 		
 		//Mithilfe des CADConverters werden die Shape-Objekte in die
 		//fuer CAD-Code benötigten Linien und Boegen umgewandelt
