@@ -17,13 +17,14 @@ public class CadHandler {
 	
 	private Vector<Shape> shapeList;
 	private Vector<CadBaseObject> cadObjectList;
+	private Config config;
 
-	public CadHandler(Vector<Shape> shapeList) {
-		this.shapeList = shapeList;
+	public CadHandler(Config config) {
+		this.config = config;
 	}
 
 	
-	public void createCadCode() {
+	public void createCadCode(Vector<Shape> shapeList) {
 		
 		//Konvertierung der Koordinaten von OpenOffice (Nullpunkt links oben) zu CAD (Nullpunkt links unten)
 		//new ZeroPointConverter().convertValues(shapeList);
@@ -50,6 +51,11 @@ public class CadHandler {
 		
 		//cadListe der Objektbox hinzufuegen
 		objectBox.setCadObjectList(cadObjectList);
+		//Offset zu objectbox hinzurechnen
+		objectBox.setxMax(objectBox.getxMax() + config.getOffSetX());
+		objectBox.setxMin(objectBox.getxMin() + config.getOffSetX());
+		objectBox.setyMax(objectBox.getyMax() + config.getOffSetY());
+		objectBox.setyMin(objectBox.getyMin() + config.getOffSetY());
 		
 		CadCreator cadCreator = new CadCreator(objectBox);
 		cadCreator.createCADFile("h:\\cad.vec");

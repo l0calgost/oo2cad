@@ -63,8 +63,8 @@ public class OO2CAD {
 			i++;
 
 			// CadHandler managed alle Convertierungsvorg�nge in CAD
-			CadHandler cadHandler = new CadHandler(shapeList);
-			cadHandler.createCadCode();
+			CadHandler cadHandler = new CadHandler(config);
+			cadHandler.createCadCode(shapeList);
 			System.out.println("CAD-Code wurde erfolgreich erstellt!");
 
 		} catch (Exception e) {

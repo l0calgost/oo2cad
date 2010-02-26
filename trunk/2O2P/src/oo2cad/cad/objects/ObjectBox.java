@@ -19,6 +19,16 @@ public class ObjectBox
 		this.cadObjectList = cadObjectList;
 	}
 	
+	public Vector<CadBaseObject> getCadObjectList()
+	{
+		return cadObjectList;
+	}
+
+	public void setCadObjectList(Vector<CadBaseObject> cadObjectList)
+	{
+		this.cadObjectList = cadObjectList;
+	}
+		
 	public float getxMin() {
 		return xMin;
 	}
@@ -42,15 +52,5 @@ public class ObjectBox
 	}
 	public void setyMax(float yMax) {
 		this.yMax = yMax;
-	}
-
-	public Vector<CadBaseObject> getCadObjectList()
-	{
-		return cadObjectList;
-	}
-
-	public void setCadObjectList(Vector<CadBaseObject> cadObjectList)
-	{
-		this.cadObjectList = cadObjectList;
 	}
 }
