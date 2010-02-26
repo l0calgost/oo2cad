@@ -1,12 +1,20 @@
 package oo2cad.cad.logic;
 
+
 import java.util.Vector;
 
+import oo2cad.cad.logic.shapes.EnhancedGeometryConverter;
 import oo2cad.cad.logic.shapes.StandardGeometryConverter;
 import oo2cad.cad.objects.CadBaseObject;
+import oo2cad.shapes.Ellipse;
 import oo2cad.shapes.Line;
+import oo2cad.shapes.Measure;
+import oo2cad.shapes.Path;
+import oo2cad.shapes.Polygon;
+import oo2cad.shapes.Polyline;
 import oo2cad.shapes.Rectangle;
 import oo2cad.shapes.Shape;
+import oo2cad.shapes.TextBox;
 
 /**
  * Klasse, die die OpenOffice-XML-Objekten in Cad-Objekte umwandelt
@@ -20,6 +28,7 @@ public class CadConverter
 	{
 		Vector<CadBaseObject> cadShapeList = new Vector<CadBaseObject>();
 		StandardGeometryConverter stageco = new StandardGeometryConverter();
+		EnhancedGeometryConverter engeco = new EnhancedGeometryConverter();
 		
 		for (Shape shape : shapeList)
 		{
@@ -34,6 +43,34 @@ public class CadConverter
 			{
 				objectArray = stageco.convertRectangle((Rectangle) shape);
 			}
+			if(shape instanceof Ellipse)
+			{
+				//objectArray = engeco;
+			}
+			if(shape instanceof Path)
+			{
+				
+			}
+			if(shape instanceof Measure)
+			{
+				
+			}
+			if(shape instanceof Polygon)
+			{
+				
+			}
+			if(shape instanceof Polyline)
+			{
+				
+			}
+			
+			/*
+			if(shape instanceof TextBox)
+			{
+				
+			}
+			*/
+			
 			
 			if (objectArray != null)
 			{
