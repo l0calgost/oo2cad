@@ -2,6 +2,7 @@ package oo2cad.cad.logic;
 
 import java.util.Vector;
 
+import oo2cad.cad.objects.ObjectBox;
 import oo2cad.config.Config;
 import oo2cad.shapes.AdvancedShape;
 import oo2cad.shapes.Shape;
@@ -35,15 +36,13 @@ public class CoordinateConverter
 	 * Methode um die einzelnen Werte relativ zum Bezugsbunkt zu 
 	 * berechnen. Dem Bezugspunkt wird noch das Offset aus der
 	 * Config hinzugerechnet
-	 * @param xReference X-Wert des Bezugspunkts
-	 * @param yReference Y-Wert des Bezugspunkt
-	 * @param shapeList Liste der Shapes.
-	 * @return
+	 * @param box die ObjektBox
+	 * @param shapeList die Liste mit Shape-Objekten
 	 */
-	public Vector<Shape> convertToRelative(float xReference, float yReference, Vector<Shape> shapeList)
+	public Vector<Shape> convertToRelative(ObjectBox box, Vector<Shape> shapeList)
 	{
-		this.xReference = xReference;
-		this.yReference = yReference;
+		this.xReference = box.getxMin();
+		this.yReference = box.getyMin();
 		
 		for (Shape shape : shapeList)
 		{
@@ -57,6 +56,13 @@ public class CoordinateConverter
 				setAvancedRelativeValues((AdvancedShape) shape);
 			}
 		}
+		
+		//Offset zu objectbox hinzurechnen
+		box.setxMax(box.getxMax() + config.getOffSetX());
+		box.setxMin(box.getxMin() + config.getOffSetX());
+		box.setyMax(box.getyMax() + config.getOffSetY());
+		box.setyMin(box.getyMin() + config.getOffSetY());
+		
 		return shapeList;
 	}
 	
