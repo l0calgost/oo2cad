@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 public class Config {
 
 	private Properties configs;
+	private static Config config = new Config();
 	
 	private float scaleInc;
 	private float scaleDec;
@@ -24,11 +25,17 @@ public class Config {
 	
 	private Logger log = Logger.getLogger(Config.class);
 	
-	public Config() throws IOException {
-		readConfigs();
+	public static Config getInstance()
+	{
+		if(config == null)
+		{
+			config = new Config();
+		}
+		
+		return config;		
 	}
-
-	private void readConfigs() throws FileNotFoundException{
+	
+	public void readConfigs() throws FileNotFoundException{
 
 		setConfigs(new Properties());
 

@@ -50,7 +50,7 @@ public class ObjectBoxValueGetter
 				setMinValues(sS.getEndX(), sS.getEndY());
 				setMaxValuesSimpleShapes(sS.getStartX(), sS.getStartY());
 				setMaxValuesSimpleShapes(sS.getEndX(), sS.getEndY());
-			}	
+			}	 
 		}
 	}
 	
