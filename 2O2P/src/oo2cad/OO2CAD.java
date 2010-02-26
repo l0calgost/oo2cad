@@ -37,8 +37,8 @@ public class OO2CAD {
 		config.setDestFilePath("");//wird bisher noch statisch gesetzt
 		config.setScaleInc(1);
 		config.setScaleDec(1);
-		config.setOffSetWidth(0);
-		config.setOffSetHeight(0);
+		config.setOffSetX(0);
+		config.setOffSetY(0);
 		
 		log.info("OpenOffice datei eingelesen! Pfad: " + config.getSourceFilePath());
 		
