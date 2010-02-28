@@ -27,6 +27,21 @@ public class OO2CADExceptionConstants
 	public static final OO2CADExceptionConstants INPUT_ERROR = new OO2CADExceptionConstants("Eingabefehler festgestellt!");
 
 	/**
+	 * Entpackungs-Fehler
+	 */
+	public static final OO2CADExceptionConstants UNZIP_ERROR = new OO2CADExceptionConstants("Fehler beim Entpacken!");
+	
+	/**
+	 * Parser-Fehler
+	 */
+	public static final OO2CADExceptionConstants PARSER_ERROR = new OO2CADExceptionConstants("Fehler beim Parsen!");
+	
+	/**
+	 * CAD-Datei Fehler
+	 */
+	public static final OO2CADExceptionConstants CAD_CREATION_ERROR = new OO2CADExceptionConstants("Fehler beim Schreiben der CAD-Datei!");
+	
+	/**
 	 * Gibt den Fehler als Text zurück
 	 * 
 	 * @return message den Fehlertext
