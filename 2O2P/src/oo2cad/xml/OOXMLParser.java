@@ -7,7 +7,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import oo2cad.config.Config;
+import oo2cad.exception.OO2CADException;
+import oo2cad.exception.OO2CADExceptionConstants;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
@@ -18,12 +19,12 @@ public class OOXMLParser {
 	
 	private XMLHandler xmlHandler;
 	
-	public OOXMLParser(Config config)
+	public OOXMLParser()
 	{
-		xmlHandler = new XMLHandler(config);
+		xmlHandler = new XMLHandler();
 	}
 	
-	public void parseFile(File file) {
+	public void parseFile(File file) throws OO2CADException {
 
 		//get a factory
 		SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -37,14 +38,26 @@ public class OOXMLParser {
 			sp.parse(file, xmlHandler);
 
 		}catch(SAXException se) {
+			
 			log.error("SAX-Fehler! Grund: " + se.getMessage());
 			se.printStackTrace();
+			
+			throw new OO2CADException(OO2CADExceptionConstants.PARSER_ERROR);
+			
+			
 		}catch(ParserConfigurationException pce) {
+			
 			log.error("ParserConfiguration-Fehler! Grund: " + pce.getMessage());
 			pce.printStackTrace();
+			
+			throw new OO2CADException(OO2CADExceptionConstants.PARSER_ERROR);
+			
 		}catch (IOException ie) {
+			
 			log.error("IO-Fehler! Grund: " + ie.getMessage());
 			ie.printStackTrace();
+			
+			throw new OO2CADException(OO2CADExceptionConstants.PARSER_ERROR);
 		}
 		
 	}

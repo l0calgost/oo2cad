@@ -1,6 +1,5 @@
 package oo2cad.xml;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Enumeration;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -27,9 +26,9 @@ public class XMLHandler extends DefaultHandler
 	private boolean insidePage = false;
 
 	// Konstruktor
-	public XMLHandler(Config config)
+	public XMLHandler()
 	{
-		this.config = config;
+		this.config = Config.getInstance();
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class XMLHandler extends DefaultHandler
 			Attributes attributes) throws SAXException
 	{
 
-		Enumeration<Object> en = config.getConfigs().keys();
+		Enumeration<Object> en = config.getProperties().keys();
 
 		float scale = config.getScale();
 		
@@ -124,7 +123,7 @@ public class XMLHandler extends DefaultHandler
 			try {
 				
 				Class shapeObjectClass = Class.forName("oo2cad.shapes."
-						+ config.getConfigs().getProperty(name));
+						+ config.getProperties().getProperty(name));
 				
 				shapeObject = (Shape) shapeObjectClass.newInstance();
 				
