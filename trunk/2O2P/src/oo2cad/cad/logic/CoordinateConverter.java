@@ -24,9 +24,9 @@ public class CoordinateConverter
 	private float offSetX;
 	private float offSetY;
 	
-	public CoordinateConverter(Config config)
+	public CoordinateConverter()
 	{
-		this.config = config;
+		this.config = Config.getInstance();
 		
 		offSetX = config.getOffSetX();
 		offSetY = config.getOffSetY();

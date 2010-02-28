@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.ObjectBox;
-import oo2cad.config.Config;
+import oo2cad.exception.OO2CADException;
 import oo2cad.shapes.Shape;
 
 /**
@@ -17,14 +17,9 @@ public class CadHandler {
 	
 	private Vector<Shape> shapeList;
 	private Vector<CadBaseObject> cadObjectList;
-	private Config config;
-
-	public CadHandler(Config config) {
-		this.config = config;
-	}
-
-	
-	public void createCadCode(Vector<Shape> shapeList) {
+		
+	public void createCadCode(Vector<Shape> shapeList) throws OO2CADException
+	{
 		
 		//Konvertierung der Koordinaten von OpenOffice (Nullpunkt links oben) zu CAD (Nullpunkt links unten)
 		//new ZeroPointConverter().convertValues(shapeList);
@@ -41,7 +36,7 @@ public class CadHandler {
 		
 		//Hier werden die einzelnen Shapes von der fixen Lage geloest
 		//und relativ zum Bezugspunkt angegeben
-		CoordinateConverter coco = new CoordinateConverter(config);
+		CoordinateConverter coco = new CoordinateConverter();
 		coco.convertObjectsToRelativePosition(objectBox, shapeList);
 		
 		//Mithilfe des CADConverters werden die Shape-Objekte in die
