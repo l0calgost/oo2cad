@@ -14,6 +14,9 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import oo2cad.exception.OO2CADException;
+import oo2cad.exception.OO2CADExceptionConstants;
+
 import org.apache.log4j.Logger;
 
 public class Unzip 
@@ -23,7 +26,7 @@ public class Unzip
 	//Zip Buffer
 	private final byte[] buffer = new byte[ 0xFFFF ]; 
 	
-	public File extractFile(String source, String dest)
+	public File extractFile(String source, String dest) throws OO2CADException
 	{
 		int fileLength = 0;
 		
@@ -60,9 +63,8 @@ public class Unzip
 			}
 		}		
 		catch (IOException e) 
-		{
-			log.error("Fehler! Entpacken fehlgeschlagen! Grund: " + e.getMessage());
-			System.out.println("Entpacken fehlgeschlagen ... " + e.getMessage());
+		{			
+			throw new OO2CADException(OO2CADExceptionConstants.UNZIP_ERROR);	
 		}	
 		
 		//Datei zurückliefern Typ:File
