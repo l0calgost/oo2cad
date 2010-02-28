@@ -1,11 +1,11 @@
 package oo2cad;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Vector;
 
 import oo2cad.cad.logic.CadHandler;
 import oo2cad.config.Config;
+import oo2cad.exception.OO2CADException;
 import oo2cad.shapes.Shape;
 import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
@@ -25,11 +25,22 @@ public class OO2CAD {
 		
 		// Configurations aus der config.properties auslesen
 		Config config= Config.getInstance();
+		
+		//Unzipper fuer den ODG-Container
+		Unzip uz = new Unzip();
+		
+		//XML-Parser fuer die conten.xml
+		OOXMLParser parser = new OOXMLParser();
+		
+		// CadHandler managed alle Convertierungsvorgaenge in CAD
+		CadHandler cadHandler = new CadHandler();
+		
 		try
 		{
 			config.readConfigs();
 		}
-		catch (IOException e) {
+		catch (OO2CADException e) 
+		{
 			log.error("Fehler! Konfigurationsdatei nicht gefunden!");
 		}
 
@@ -43,35 +54,32 @@ public class OO2CAD {
 		
 		log.info("OpenOffice datei eingelesen! Pfad: " + config.getSourceFilePath());
 		
-		// aus der *.odg-Datei die content.xml holen
-
-		Unzip uz = new Unzip();
-		
-		//File ooXmlContent = new File(config.getConfigs().getProperty("xmlFileName"));
-		File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getConfigs().getProperty("xmlFileName"));
-
+		// aus der *.odg-Datei die content.xml holen		
 		try {
-			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
-
-			// File an Parser uebergeben
-			OOXMLParser parser = new OOXMLParser(config);
-
-			parser.parseFile(ooXmlContent);
 			
-			log.info("Es wurde(n) " + parser.getXmlHandler().getShapeList().size() + " Zeichenobjekte erstellt!");
+			//File ooXmlContent = new File(config.getProperties().getProperty("xmlFileName"));
+			File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getProperties().getProperty("xmlFileName"));
+			
+			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
+		
+			// File an Parser uebergeben
+			parser.parseFile(ooXmlContent);
 			
 			Vector<Shape> shapeList = parser.getXmlHandler().getShapeList();
 			
-			int i = 0;
-			i++;
-
-			// CadHandler managed alle Convertierungsvorg�nge in CAD
-			CadHandler cadHandler = new CadHandler(config);
+			log.info("Es wurde(n) " + shapeList.size() + " Zeichenobjekte gefunden!");
+			
 			cadHandler.createCadCode(shapeList);
-			System.out.println("CAD-Code wurde erfolgreich erstellt!");
-
-		} catch (Exception e) {
-			log.error("Fehler! Parsen der XML-Datei fehlgeschlagen! Grund: " + e.getMessage());
+			
+		} catch (OO2CADException e) {
+			
+			log.error(e.getMessage());
+			log.error(e.getStackTrace());
+			System.exit(0);
 		}
+		
+		log.info("CAD-Datei wurde erfolgreich erstellt");
+		System.out.println("CAD-Code wurde erfolgreich erstellt!");
+		
 	}
 }
