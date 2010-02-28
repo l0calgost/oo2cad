@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import oo2cad.exception.OO2CADException;
+import oo2cad.exception.OO2CADExceptionConstants;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -12,7 +15,8 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 
-	private Properties configs;
+	private Properties properties;
+	
 	private static Config config = new Config();
 	
 	private float scaleInc;
@@ -26,39 +30,38 @@ public class Config {
 	private Logger log = Logger.getLogger(Config.class);
 	
 	public static Config getInstance()
-	{
-		if(config == null)
-		{
-			config = new Config();
-		}
-		
+	{		
 		return config;		
 	}
 	
-	public void readConfigs() throws FileNotFoundException{
+	public void readConfigs() throws OO2CADException{
 
-		setConfigs(new Properties());
+		setProperties(new Properties());
 
-		try {
+		
 			InputStream stream = Config.class
 					.getResourceAsStream("../../config.properties");
 
-			configs.load(stream);
-
-			stream.close();
-		} catch (IOException e) {
-			log.error(e.getMessage());
-			System.out.println("" + e.getMessage());
-			e.printStackTrace();
-		}
+			try
+			{
+				properties.load(stream);
+				
+				stream.close();
+			}
+			catch (IOException e)
+			{
+				throw new OO2CADException(OO2CADExceptionConstants.CONFIG_ERROR);
+			}
+		
 	}
 
-	public Properties getConfigs() {
-		return configs;
+	public Properties getProperties() {
+		
+		return properties;
 	}
 
-	public void setConfigs(Properties properties) {
-		this.configs = properties;
+	public void setProperties(Properties properties) {
+		this.properties = properties;
 	}
 
 	public float getScale()
