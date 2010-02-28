@@ -9,8 +9,8 @@ import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.CadBow;
 import oo2cad.cad.objects.CadLine;
 import oo2cad.cad.objects.ObjectBox;
-import oo2cad.shapes.Rectangle;
-import oo2cad.shapes.Shape;
+import oo2cad.exception.OO2CADException;
+import oo2cad.exception.OO2CADExceptionConstants;
 
 import org.apache.log4j.Logger;
 
@@ -29,7 +29,7 @@ public class CadCreator
 		this.objectBox = box;
 	}
 	
-	public void createCADFile(String filepath)
+	public void createCADFile(String filepath) throws OO2CADException
 	{
 		try
 		{
@@ -71,9 +71,10 @@ public class CadCreator
 			
 			log.info("CAD- Datei wurde erstellt!");
 			
-		} catch (IOException e)
+		} 
+		catch (IOException e)
 		{
-			log.error("Fehler beim Schreiben der CAD-Datei! Grund: " + e.getMessage());
+			throw new OO2CADException(OO2CADExceptionConstants.CAD_CREATION_ERROR);
 		}
 	}
 }
