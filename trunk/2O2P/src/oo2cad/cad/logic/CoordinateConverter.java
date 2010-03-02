@@ -23,6 +23,7 @@ public class CoordinateConverter
 	private float yReference;
 	private float offSetX;
 	private float offSetY;
+	private float unit;
 	
 	public CoordinateConverter()
 	{
@@ -30,6 +31,7 @@ public class CoordinateConverter
 		
 		offSetX = config.getOffSetX();
 		offSetY = config.getOffSetY();
+		unit = Float.parseFloat(config.getProperties().getProperty("unit"));
 	}
 	
 	/**
@@ -66,23 +68,25 @@ public class CoordinateConverter
 	
 	private void setSimpleRelativeValues(SimpleShape shape)
 	{
-		shape.setStartX(Math.abs(xReference - shape.getStartX()) + offSetX);
-		shape.setStartY(Math.abs(yReference - shape.getStartY()) + offSetY);
-		shape.setEndX(Math.abs(xReference - shape.getEndX()) + offSetX);
-		shape.setEndY(Math.abs(yReference - shape.getEndY()) + offSetY);
+		shape.setStartX((Math.abs(xReference - shape.getStartX()) + offSetX) * unit);
+		shape.setStartY((Math.abs(yReference - shape.getStartY()) + offSetY) * unit);
+		shape.setEndX((Math.abs(xReference - shape.getEndX()) + offSetX) * unit);
+		shape.setEndY((Math.abs(yReference - shape.getEndY()) + offSetY) * unit);
 	}
 	
 	private void setAvancedRelativeValues(AdvancedShape shape)
 	{
-		shape.setX(Math.abs(xReference - shape.getX()) + offSetX);
-		shape.setY(Math.abs(yReference - shape.getY()) + offSetY);
+		shape.setX((Math.abs(xReference - shape.getX()) + offSetX) * unit);
+		shape.setY((Math.abs(yReference - shape.getY()) + offSetY) * unit);
+		shape.setWidth(shape.getWidth() * unit);
+		shape.setHeight(shape.getHeight() * unit);
 	}
 	
 	private void setObjectBoxValues(ObjectBox box)
 	{
-		box.setxMax(Math.abs(box.getxMax() - box.getxMin()) + offSetX);
-		box.setyMax(Math.abs(box.getyMax() - box.getyMin()) + offSetY);
-		box.setxMin(offSetX);
-		box.setyMin(offSetY);
+		box.setxMax((Math.abs(box.getxMax() - box.getxMin()) + offSetX) * unit);
+		box.setyMax((Math.abs(box.getyMax() - box.getyMin()) + offSetY) * unit);
+		box.setxMin((offSetX) * unit);
+		box.setyMin((offSetY) * unit);
 	}
 }
