@@ -28,10 +28,10 @@ public class StandardGeometryConverter
 	{
 		CadLine[] rectArray = new CadLine[4];
 		
-		rectArray[0] = new CadLine(rect.getX(), rect.getY(), rect.getX() + rect.getWidth(),	rect.getY());
-		rectArray[1] = new CadLine(rect.getX() + rect.getWidth(), rect.getY(), rect.getX() + rect.getWidth(), rect.getY() + rect.getHeight());
-		rectArray[2] = new CadLine(rect.getX() + rect.getWidth(), rect.getY() + rect.getHeight(), rect.getX(), rect.getY() + rect.getHeight());
-		rectArray[3] = new CadLine(rect.getX(), rect.getY() + rect.getHeight(), rect.getX(), rect.getY());
+		rectArray[0] = new CadLine(rect.getX(), rect.getY(), rect.getX() + rect.getWidth(),	rect.getY()); //rechts
+		rectArray[1] = new CadLine(rect.getX() + rect.getWidth(), rect.getY(), rect.getX() + rect.getWidth(), rect.getY() - rect.getHeight());//rechts runter
+		rectArray[2] = new CadLine(rect.getX() + rect.getWidth(), rect.getY() - rect.getHeight(), rect.getX(), rect.getY() - rect.getHeight());//links
+		rectArray[3] = new CadLine(rect.getX(), rect.getY() - rect.getHeight(), rect.getX(), rect.getY());//links hoch
 		
 		return rectArray;
 	}
