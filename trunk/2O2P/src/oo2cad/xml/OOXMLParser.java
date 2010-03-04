@@ -17,17 +17,18 @@ public class OOXMLParser {
 	
 	private Logger log = Logger.getLogger(OOXMLParser.class);
 	
-	private XMLHandler xmlHandler;
+	private XMLEventHandler xmlHandler;
 	
 	public OOXMLParser()
 	{
-		xmlHandler = new XMLHandler();
+		xmlHandler = new XMLEventHandler();
 	}
 	
 	public void parseFile(File file) throws OO2CADException {
 
 		//get a factory
 		SAXParserFactory spf = SAXParserFactory.newInstance();
+		
 		try {
 			log.debug("Shape-Objekte erstellen");
 			
@@ -62,7 +63,7 @@ public class OOXMLParser {
 		
 	}
 
-	public XMLHandler getXmlHandler() {
+	public XMLEventHandler getXmlEventHandler() {
 		return xmlHandler;
 	}
 
