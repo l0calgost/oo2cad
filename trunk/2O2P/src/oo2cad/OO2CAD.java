@@ -9,6 +9,7 @@ import oo2cad.exception.OO2CADException;
 import oo2cad.shapes.Shape;
 import oo2cad.unzip.Unzip;
 import oo2cad.xml.OOXMLParser;
+import oo2cad.xml.XMLHandler;
 
 import org.apache.log4j.Logger;
 
@@ -29,8 +30,8 @@ public class OO2CAD {
 		//Unzipper fuer den ODG-Container
 		Unzip uz = new Unzip();
 		
-		//XML-Parser fuer die conten.xml
-		OOXMLParser parser = new OOXMLParser();
+		//XML-Handler fuer die Behandlung der content.xml
+		XMLHandler xmlHandler= new XMLHandler();
 		
 		// CadHandler managed alle Convertierungsvorgaenge in CAD
 		CadHandler cadHandler = new CadHandler();
@@ -54,20 +55,18 @@ public class OO2CAD {
 		
 		log.info("OpenOffice datei eingelesen! Pfad: " + config.getSourceFilePath());
 		
-		// aus der *.odg-Datei die content.xml holen		
 		try {
 			
+			// aus der *.odg-Datei die content.xml holen	
 			//File ooXmlContent = new File(config.getProperties().getProperty("xmlFileName"));
 			File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getProperties().getProperty("xmlFileName"));
 			
 			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 		
-			// File an Parser uebergeben
-			parser.parseFile(ooXmlContent);
-			
-			Vector<Shape> shapeList = parser.getXmlHandler().getShapeList();
-			
-			log.info("Es wurde(n) " + shapeList.size() + " Zeichenobjekte gefunden!");
+			//content.xml parsen
+			xmlHandler.parseFile(ooXmlContent);
+						
+			Vector<Shape> shapeList = xmlHandler.getShapeList();
 			
 			cadHandler.createCadCode(shapeList);
 			
