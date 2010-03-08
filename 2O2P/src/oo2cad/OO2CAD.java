@@ -8,7 +8,6 @@ import oo2cad.config.Config;
 import oo2cad.exception.OO2CADException;
 import oo2cad.shapes.Shape;
 import oo2cad.unzip.Unzip;
-import oo2cad.xml.OOXMLParser;
 import oo2cad.xml.XMLHandler;
 
 import org.apache.log4j.Logger;
@@ -20,10 +19,9 @@ public class OO2CAD {
 	/**
 	 * Initiale Klasse um das Programm zu starten.
 	 */
-	public static void main(String[] args) {
-		
-		//DOMConfigurator.configureAndWatch("/config/log4j.xml");
-		
+	public static void main(String[] args) 
+	{
+				
 		// Configurations aus der config.properties auslesen
 		Config config= Config.getInstance();
 		
@@ -73,7 +71,7 @@ public class OO2CAD {
 		} catch (OO2CADException e) {
 			
 			log.error(e.getMessage());
-			log.error(e.getStackTrace());
+			e.printStackTrace();
 			System.exit(0);
 		}
 		
