@@ -44,30 +44,26 @@ public class XMLEventHandler extends DefaultHandler
 			Attributes attributes) throws SAXException
 	{
 
-		Enumeration<Object> en = config.getProperties().keys();
-
 		float scale = config.getScale();
+				
+		name = name.replace("draw:", "");
 		
-		while (en.hasMoreElements())
+		shape = createShapeByName(config.getProperties().getProperty(name,""));
+		
+		if (shape != null)
 		{
-			if (name.contains((String) en.nextElement()))
+			shapeName = name;
+			
+			if (shape instanceof SimpleShape)
 			{
-				shapeName = name;
-				
-				name = name.replace("draw:", "");
-				
-				shape = createShapeByName(name);
-								
-				if (shape instanceof SimpleShape)
-				{
-					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
-				}
-				if (shape instanceof AdvancedShape)
-				{
-					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
-				}
+				this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
+			}
+			if (shape instanceof AdvancedShape)
+			{
+				this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
 			}
 		}
+
 	}
 	
 	/**
@@ -103,24 +99,21 @@ public class XMLEventHandler extends DefaultHandler
 			try {
 				
 				Class shapeObjectClass = Class.forName("oo2cad.shapes."
-						+ config.getProperties().getProperty(name));
+						+ name);
 				
 				shapeObject = (Shape) shapeObjectClass.newInstance();
 				
 				
 			} catch (ClassNotFoundException e) {
-				log.error("ClassNotFoundException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
-				e.printStackTrace();
+				log.error("Für Klasse '" + name + "' konnte kein Objekt erstellt werden! Grund: "+ e.getMessage());
 			} 
 			catch (InstantiationException e)
 			{
 				log.error("InstantiationException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
-				e.printStackTrace();
 			} 
 			catch (IllegalAccessException e)
 			{
 				log.error("IllegalAccessException für folgenden Tag: '" + name + "'! Grund: " + e.getMessage());
-				e.printStackTrace();
 			} 
 		
 		return shapeObject;
