@@ -6,6 +6,7 @@ import java.util.Vector;
 import oo2cad.cad.logic.CadHandler;
 import oo2cad.config.Config;
 import oo2cad.exception.OO2CADException;
+import oo2cad.gui.OO2CADGui;
 import oo2cad.shapes.Shape;
 import oo2cad.unzip.Unzip;
 import oo2cad.xml.XMLHandler;
@@ -21,7 +22,12 @@ public class OO2CAD {
 	 */
 	public static void main(String[] args) 
 	{
-				
+		//GUI Aufrufen
+		new OO2CADGui().Window();
+	}
+	
+	public void start()
+	{
 		// Configurations aus der config.properties auslesen
 		Config config= Config.getInstance();
 		
@@ -77,6 +83,5 @@ public class OO2CAD {
 		
 		log.info("CAD-Datei wurde erfolgreich erstellt");
 		System.out.println("CAD-Code wurde erfolgreich erstellt!");
-		
 	}
 }
