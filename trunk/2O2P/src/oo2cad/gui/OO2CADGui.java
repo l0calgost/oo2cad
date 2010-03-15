@@ -1,6 +1,7 @@
 package oo2cad.gui;
 
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import oo2cad.gui.action.OO2CADGuiActionHandler;
 
 public class OO2CADGui extends JFrame
 {
@@ -73,6 +73,8 @@ public class OO2CADGui extends JFrame
 		JFrame jf = new JFrame();
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setLayout(new GridLayout(0,2,6,3));		
+		jf.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2, 
+				Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2);
 		
 		//Button Labeln		
 		sourceButton = new JButton("Select");
@@ -97,17 +99,11 @@ public class OO2CADGui extends JFrame
 		offSetHeightTextField = new JTextField();
 		offSetWidthTextField = new JTextField();
 		
-		//OpenFile Dialog
-		JFileChooser jfSource = new JFileChooser();
-		jfSource.setDialogType(JFileChooser.OPEN_DIALOG);
-		jfSource.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		File file = new File("C:\\");
-		jfSource.setCurrentDirectory(file);
-		
-		JFileChooser jfDest = new JFileChooser();
-		jfDest.setDialogType(JFileChooser.SAVE_DIALOG);
-		
+		//ActionListener's		
 		sourceButton.addActionListener(actionHandler);
+		destButton.addActionListener(actionHandler);
+		
+		closeButton.addActionListener(actionHandler);
 		
 		
 		//Source Pfad
@@ -136,5 +132,67 @@ public class OO2CADGui extends JFrame
 		
 		jf.pack();
 		jf.setVisible(true);
+	}
+
+
+
+	public JButton getCloseButton()
+	{
+		return closeButton;
+	}
+
+
+	public JButton getConvertButton()
+	{
+		return convertButton;
+	}
+
+
+	public JButton getSourceButton()
+	{
+		return sourceButton;
+	}
+
+
+	public JButton getDestButton()
+	{
+		return destButton;
+	}
+
+
+	public JTextField getSourcePathTextField()
+	{
+		return sourcePathTextField;
+	}
+
+
+	public JTextField getDestPathTextField()
+	{
+		return destPathTextField;
+	}
+
+
+	public JTextField getMeasureXTextField()
+	{
+		return measureXTextField;
+	}
+
+
+	public JTextField getMeasureYTextField()
+	{
+		return measureYTextField;
+	}
+
+
+	public JTextField getOffSetWidthTextField()
+	{
+		return offSetWidthTextField;
+	}
+
+	public JTextField getOffSetHeightTextField()
+	{
+		return offSetHeightTextField;
 	}	
+	
+	
 }
