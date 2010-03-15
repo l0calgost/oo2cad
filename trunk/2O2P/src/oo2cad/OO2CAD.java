@@ -23,7 +23,7 @@ public class OO2CAD {
 	public static void main(String[] args) 
 	{
 		//GUI Aufrufen
-		new OO2CADGui().Window();
+		new OO2CADGui().createWindow();
 	}
 	
 	public void start()
