@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import oo2cad.gui.action.OO2CADGuiActionHandler;
+
 public class OO2CADGui extends JFrame
 {
 	/*
@@ -38,10 +40,12 @@ public class OO2CADGui extends JFrame
 	
 	private JLabel offSetLabelHeight;
 	private JLabel offSetLabelWidth;
+	
+	OO2CADGuiActionHandler actionHandler = new OO2CADGuiActionHandler(this);
 
 	
 	
-	public void Window()
+	public void createWindow()
 	{
 		//Look and Feel
 		try
@@ -74,8 +78,8 @@ public class OO2CADGui extends JFrame
 		sourceButton = new JButton("Select");
 		destButton = new JButton("Save");
 		
-		measureLabelX = new JLabel("Verhältniss");
-		measureLabelY = new JLabel("Verhältniss");
+		measureLabelX = new JLabel("Verhältnis");
+		measureLabelY = new JLabel("Verhältnis");
 		
 		offSetLabelHeight = new JLabel("Offset Höhe:(X) ");
 		offSetLabelWidth = new JLabel("Offset Width:(Y) ");
@@ -103,16 +107,7 @@ public class OO2CADGui extends JFrame
 		JFileChooser jfDest = new JFileChooser();
 		jfDest.setDialogType(JFileChooser.SAVE_DIALOG);
 		
-		//Button Click Funktionen
-		ActionListener alSourceButton = new ActionListener()
-		{			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-								
-			}
-		};
-		sourceButton.addActionListener(alSourceButton);
+		sourceButton.addActionListener(actionHandler);
 		
 		
 		//Source Pfad
