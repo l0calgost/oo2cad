@@ -26,7 +26,7 @@ public class OO2CAD {
 		new OO2CADGui().createWindow();
 	}
 	
-	public void start()
+	public static void start()
 	{
 		// Configurations aus der config.properties auslesen
 		Config config= Config.getInstance();
@@ -50,12 +50,13 @@ public class OO2CAD {
 		}
 
 		//Setzen der benoetigten Variablen. Dies geschieht nachher alles ueber die Gui!
-		config.setSourceFilePath("h:\\openoffice.odg");
+		/*config.setSourceFilePath("h:\\openoffice.odg");
 		config.setDestFilePath("");//wird bisher noch statisch gesetzt
 		config.setScaleInc(1);
 		config.setScaleDec(1);
 		config.setOffSetX(0);
 		config.setOffSetY(0);
+		*/
 		
 		log.info("OpenOffice datei eingelesen! Pfad: " + config.getSourceFilePath());
 		
