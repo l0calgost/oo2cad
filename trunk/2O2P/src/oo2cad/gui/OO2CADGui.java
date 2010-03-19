@@ -70,15 +70,15 @@ public class OO2CADGui extends JFrame
 		}
 		
 		//JFrame
-		JFrame jf = new JFrame();
+		JFrame jf = new JFrame("OO2CAD");
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setLayout(new GridLayout(0,2,6,3));		
 		jf.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2, 
 				Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2);
 		
 		//Button Labeln		
-		sourceButton = new JButton("Select");
-		destButton = new JButton("Save");
+		sourceButton = new JButton("Select ODG File");
+		destButton = new JButton("Save CAD File");
 		
 		measureLabelX = new JLabel("Verhältnis");
 		measureLabelY = new JLabel("Verhältnis");
@@ -103,6 +103,7 @@ public class OO2CADGui extends JFrame
 		sourceButton.addActionListener(actionHandler);
 		destButton.addActionListener(actionHandler);
 		
+		convertButton.addActionListener(actionHandler);
 		closeButton.addActionListener(actionHandler);
 		
 		
