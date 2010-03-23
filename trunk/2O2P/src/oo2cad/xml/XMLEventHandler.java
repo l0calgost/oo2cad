@@ -1,6 +1,5 @@
 package oo2cad.xml;
 
-import java.util.Enumeration;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,22 +47,28 @@ public class XMLEventHandler extends DefaultHandler
 				
 		name = name.replace("draw:", "");
 		
-		shape = createShapeByName(config.getProperties().getProperty(name,""));
+		name = config.getProperties().getProperty(name,"");
 		
-		if (shape != null)
+		if (!name.equals(""))
 		{
-			shapeName = name;
+			shape = createShapeByName(name);
 			
-			if (shape instanceof SimpleShape)
+			if (shape != null)
 			{
-				this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
+				shapeName = name;
+				
+				if (shape instanceof SimpleShape)
+				{
+					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
+				}
+				if (shape instanceof AdvancedShape)
+				{
+					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
+				}
 			}
-			if (shape instanceof AdvancedShape)
-			{
-				this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
-			}
-		}
 
+		}
+		
 	}
 	
 	/**
@@ -75,7 +80,7 @@ public class XMLEventHandler extends DefaultHandler
 	public void endElement(String uri, String localName, String name)
 			throws SAXException
 	{
-		if (name.contains(shapeName))
+		if (name.contains(shapeName.toLowerCase()))
 		{
 			if (shape != null)
 			{
