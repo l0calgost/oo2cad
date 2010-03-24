@@ -22,6 +22,8 @@ public class XMLEventHandler extends DefaultHandler
 	private String shapeName = "";
 	private Shape shape;
 	private Vector<Shape> shapeList = new Vector<Shape>();
+	
+	private final String NO_SHAPE_FOUND = "noShapeFound";
 
 	Logger log = Logger.getLogger(XMLEventHandler.class);
 	
@@ -47,9 +49,9 @@ public class XMLEventHandler extends DefaultHandler
 				
 		name = name.replace("draw:", "");
 		
-		name = config.getProperties().getProperty(name,"");
+		name = config.getProperties().getProperty(name,NO_SHAPE_FOUND);
 		
-		if (!name.equals(""))
+		if (!name.equals(NO_SHAPE_FOUND))
 		{
 			shape = createShapeByName(name);
 			
@@ -80,7 +82,7 @@ public class XMLEventHandler extends DefaultHandler
 	public void endElement(String uri, String localName, String name)
 			throws SAXException
 	{
-		if (name.contains(shapeName.toLowerCase()))
+		if (name.contains(shapeName.toLowerCase()) && !name.equals(NO_SHAPE_FOUND))
 		{
 			if (shape != null)
 			{
