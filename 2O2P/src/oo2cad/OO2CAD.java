@@ -63,8 +63,7 @@ public class OO2CAD {
 		try {
 			
 			// aus der *.odg-Datei die content.xml holen	
-			//File ooXmlContent = new File(config.getProperties().getProperty("xmlFileName"));
-			File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getProperties().getProperty("xmlFileName"));
+			File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getDestFilePath());
 			
 			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 		
