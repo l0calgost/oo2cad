@@ -19,10 +19,11 @@ public class Config {
 	
 	private static Config config = new Config();
 	
-	private float scaleInc;
-	private float scaleDec;
-	private float offSetX;
-	private float offSetY;
+	//Standartwerte für GUI
+	private float scaleInc = 1;
+	private float scaleDec = 1;
+	private float offSetX = 0;
+	private float offSetY = 0;
 	
 	private String destFilePath;
 	private String sourceFilePath;

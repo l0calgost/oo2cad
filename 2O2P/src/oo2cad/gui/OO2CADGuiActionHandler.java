@@ -67,10 +67,20 @@ public class OO2CADGuiActionHandler implements ActionListener
 			jfDest.setAcceptAllFileFilterUsed(false);
 			
 			jfDest.showSaveDialog(gui);
-											
+			
+						
 			if(jfDest.getSelectedFile() != null)
 			{
-				gui.getDestPathTextField().setText(jfDest.getSelectedFile().toString());
+				
+				if(!(jfDest.getSelectedFile().toString().endsWith(".vec")))
+				{
+					gui.getDestPathTextField().setText(jfDest.getSelectedFile().toString() + ".vec");
+				}
+				else
+				{
+					gui.getDestPathTextField().setText(jfDest.getSelectedFile().toString());
+				}
+				
 			}
 			else
 			{
