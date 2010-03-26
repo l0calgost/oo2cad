@@ -2,17 +2,19 @@ package oo2cad.gui;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.MaskFormatter;
+
+import oo2cad.config.Config;
 
 
 public class OO2CADGui extends JFrame
@@ -32,8 +34,8 @@ public class OO2CADGui extends JFrame
 	private JTextField measureXTextField;
 	private JTextField measureYTextField;
 	
-	private JTextField offSetWidthTextField;
-	private JTextField offSetHeightTextField;
+	private JTextField offSetXTextField;
+	private JTextField offSetYTextField;
 	
 	private JLabel measureLabelX;
 	private JLabel measureLabelY;
@@ -41,9 +43,12 @@ public class OO2CADGui extends JFrame
 	private JLabel offSetLabelHeight;
 	private JLabel offSetLabelWidth;
 	
-	OO2CADGuiActionHandler actionHandler = new OO2CADGuiActionHandler(this);
-
+	MaskFormatter mask;
 	
+	OO2CADGuiActionHandler actionHandler = new OO2CADGuiActionHandler(this);
+	
+	//Config
+	Config config = Config.getInstance();
 	
 	public void createWindow()
 	{
@@ -80,24 +85,33 @@ public class OO2CADGui extends JFrame
 		sourceButton = new JButton("Select ODG File");
 		destButton = new JButton("Save CAD File");
 		
-		measureLabelX = new JLabel("Verhältnis");
-		measureLabelY = new JLabel("Verhältnis");
+		measureLabelX = new JLabel("Maßstab");
+		measureLabelY = new JLabel(":");
 		
 		offSetLabelHeight = new JLabel("Offset Höhe:(X) ");
-		offSetLabelWidth = new JLabel("Offset Width:(Y) ");
+		offSetLabelWidth = new JLabel("Offset Breite:(Y) ");
 		
 		convertButton = new JButton("Start...");
 		closeButton = new JButton("Close");
 		
 		//TextFelder erzeugen
 		sourcePathTextField = new JTextField();
-		destPathTextField = new JTextField();
+		destPathTextField = new JTextField();	
 		
-		measureXTextField = new JTextField();
+		
+		measureXTextField = new JTextField();		
+		measureXTextField.setText(Float.toString(config.getScaleInc()));
+		//Eingabeprüfen
+		measureXTextField.getDocument().addDocumentListener(new OO2CADTextFieldListener());
+		
 		measureYTextField = new JTextField();
+		measureYTextField.setText(Float.toString(config.getScaleDec()));
 		
-		offSetHeightTextField = new JTextField();
-		offSetWidthTextField = new JTextField();
+		offSetYTextField = new JTextField();
+		offSetYTextField.setText(Float.toString(config.getOffSetY()));
+		
+		offSetXTextField = new JTextField();
+		offSetXTextField.setText(Float.toString(config.getOffSetY()));
 		
 		//ActionListener's		
 		sourceButton.addActionListener(actionHandler);
@@ -123,9 +137,9 @@ public class OO2CADGui extends JFrame
 		
 		//Offset
 		jf.add(offSetLabelHeight);
-		jf.add(offSetHeightTextField);
+		jf.add(offSetYTextField);
 		jf.add(offSetLabelWidth);
-		jf.add(offSetWidthTextField);		
+		jf.add(offSetXTextField);		
 		
 		//Close und Convert Button
 		jf.add(convertButton);
@@ -134,7 +148,6 @@ public class OO2CADGui extends JFrame
 		jf.pack();
 		jf.setVisible(true);
 	}
-
 
 
 	public JButton getCloseButton()
@@ -187,12 +200,12 @@ public class OO2CADGui extends JFrame
 
 	public JTextField getOffSetWidthTextField()
 	{
-		return offSetWidthTextField;
+		return offSetXTextField;
 	}
 
 	public JTextField getOffSetHeightTextField()
 	{
-		return offSetHeightTextField;
+		return offSetYTextField;
 	}	
 	
 	
