@@ -119,4 +119,14 @@ public class Config {
 		this.offSetY = offSetY;
 	}
 
+	public float getScaleInc()
+	{
+		return scaleInc;
+	}
+
+	public float getScaleDec()
+	{
+		return scaleDec;
+	}
+
 }
