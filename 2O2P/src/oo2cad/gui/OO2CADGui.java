@@ -78,9 +78,7 @@ public class OO2CADGui extends JFrame
 		JFrame jf = new JFrame("OO2CAD");
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setLayout(new GridLayout(0,2,6,3));		
-		jf.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2, 
-				Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2);
-		
+
 		//Button Labeln		
 		sourceButton = new JButton("Select ODG File");
 		destButton = new JButton("Save CAD File");
@@ -146,6 +144,10 @@ public class OO2CADGui extends JFrame
 		jf.add(closeButton);
 		
 		jf.pack();
+		
+		jf.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - jf.getSize().width / 2, 
+				Toolkit.getDefaultToolkit().getScreenSize().height / 2 - jf.getSize().height / 2);
+
 		jf.setVisible(true);
 	}
 
