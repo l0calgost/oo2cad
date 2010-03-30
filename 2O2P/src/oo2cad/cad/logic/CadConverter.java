@@ -6,6 +6,7 @@ import java.util.Vector;
 import oo2cad.cad.logic.shapes.EnhancedGeometryConverter;
 import oo2cad.cad.logic.shapes.StandardGeometryConverter;
 import oo2cad.cad.objects.CadBaseObject;
+import oo2cad.shapes.Circle;
 import oo2cad.shapes.Ellipse;
 import oo2cad.shapes.Line;
 import oo2cad.shapes.Measure;
@@ -43,26 +44,37 @@ public class CadConverter
 			{
 				objectArray = stageco.convertRectangle((Rectangle) shape);
 			}
+			
+			if (shape instanceof Circle)
+			{
+				objectArray = engeco.convertCircle((Circle) shape);
+			}
+			
 			if(shape instanceof Ellipse)
 			{
 				objectArray = engeco.convertEllipse((Ellipse) shape);
 			}
+			
 			if(shape instanceof Path)
 			{
 				
 			}
+			
 			if(shape instanceof Measure)
 			{
 				
 			}
+			
 			if(shape instanceof Polygon)
 			{
 				
 			}
+			
 			if(shape instanceof Polyline)
 			{
 				
 			}
+			
 			
 			/*
 			if(shape instanceof TextBox)
