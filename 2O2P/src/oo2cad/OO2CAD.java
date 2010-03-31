@@ -78,7 +78,6 @@ public class OO2CAD {
 			
 			log.error(e.getMessage());
 			e.printStackTrace();
-			System.exit(0);
 		}
 		
 		log.info("CAD-Datei wurde erfolgreich erstellt");
