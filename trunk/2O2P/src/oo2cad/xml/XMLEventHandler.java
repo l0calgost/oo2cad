@@ -44,16 +44,17 @@ public class XMLEventHandler extends DefaultHandler
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException
 	{
-
 		float scale = config.getScale();
+		
+		String tempShapeName = name;
 				
-		name = name.replace("draw:", "");
+		 tempShapeName = tempShapeName.replace("draw:", "");
 		
-		name = config.getProperties().getProperty(name,NO_SHAPE_FOUND);
+		 tempShapeName = config.getProperties().getProperty(tempShapeName,NO_SHAPE_FOUND);
 		
-		if (!name.equals(NO_SHAPE_FOUND))
+		if (!tempShapeName.equals(NO_SHAPE_FOUND))
 		{
-			shape = createShapeByName(name);
+			shape = createShapeByName(tempShapeName);
 			
 			if (shape != null)
 			{
