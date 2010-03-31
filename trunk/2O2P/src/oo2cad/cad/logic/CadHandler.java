@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.ObjectBox;
+import oo2cad.config.Config;
 import oo2cad.exception.OO2CADException;
 import oo2cad.shapes.Shape;
 
@@ -48,7 +49,7 @@ public class CadHandler {
 		objectBox.setCadObjectList(cadObjectList);
 				
 		CadCreator cadCreator = new CadCreator(objectBox);
-		cadCreator.createCADFile("h:\\cad.vec");
+		cadCreator.createCADFile(Config.getInstance().getDestFilePath());
 					
 	}
 
