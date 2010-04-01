@@ -22,6 +22,7 @@ public class XMLEventHandler extends DefaultHandler
 	private String shapeName = "";
 	private Shape shape;
 	private Vector<Shape> shapeList = new Vector<Shape>();
+	private float scale;
 	
 	private final String NO_SHAPE_FOUND = "noShapeFound";
 
@@ -30,6 +31,7 @@ public class XMLEventHandler extends DefaultHandler
 	public XMLEventHandler()
 	{
 		this.config = Config.getInstance();
+		this.scale = config.getScale();
 	}
 	
 	@Override
@@ -43,9 +45,7 @@ public class XMLEventHandler extends DefaultHandler
 	 */
 	public void startElement(String uri, String localName, String name,
 			Attributes attributes) throws SAXException
-	{
-		float scale = config.getScale();
-		
+	{		
 		String tempShapeName = name;
 				
 		 tempShapeName = tempShapeName.replace("draw:", "");
@@ -62,11 +62,11 @@ public class XMLEventHandler extends DefaultHandler
 				
 				if (shape instanceof SimpleShape)
 				{
-					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes, scale);
+					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes);
 				}
 				if (shape instanceof AdvancedShape)
 				{
-					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes, scale);
+					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes);
 				}
 			}
 
@@ -131,9 +131,8 @@ public class XMLEventHandler extends DefaultHandler
 	 * Methode um SimpleShapes mit Werten zu befuellen
 	 * @param shape das zu befuellende SimpleShape-Objekt
 	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
-	 * @param scale der zu multiplizierende Maﬂstab
 	 */
-	private void fillSimpleLineShapeWithValues(SimpleShape shape, Attributes attributes, float scale)
+	private void fillSimpleLineShapeWithValues(SimpleShape shape, Attributes attributes)
 	{
 		float startX = getAttributesFloatValue(attributes.getValue("svg:x1")) * scale;
 		float startY = getAttributesFloatValue(attributes.getValue("svg:y1")) * scale;
@@ -151,9 +150,8 @@ public class XMLEventHandler extends DefaultHandler
 	 * Methode um AdvancedShapes mit Werten zu befuellen
 	 * @param shape das zu befuellende AdvancedShape-Objekt
 	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
-	 * @param scale der zu multiplizierende Maﬂstab
 	 */
-	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes, float scale)
+	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes)
 	{	
 		float x      = getAttributesFloatValue(attributes.getValue("svg:x")) * scale;
 		float y      = getAttributesFloatValue(attributes.getValue("svg:y")) * scale;
