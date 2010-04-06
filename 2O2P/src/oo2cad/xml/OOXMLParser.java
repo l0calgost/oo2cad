@@ -9,6 +9,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import oo2cad.exception.OO2CADException;
 import oo2cad.exception.OO2CADExceptionConstants;
+import oo2cad.xml.logic.XMLEventHandler;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
