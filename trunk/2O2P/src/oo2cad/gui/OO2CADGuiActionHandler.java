@@ -4,12 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import oo2cad.OO2CAD;
 import oo2cad.config.Config;
+import oo2cad.exception.OO2CADException;
+import oo2cad.unzip.Unzip;
 
 
 public class OO2CADGuiActionHandler implements ActionListener
@@ -50,6 +54,18 @@ public class OO2CADGuiActionHandler implements ActionListener
 			{
 				;
 			}
+			
+			/*
+			 * Preview bild anzeigen lassen 
+			 *
+			try {
+				File preview = new Unzip().extractFile(gui.getSourcePathTextField().getText(), "C:\\" , "thumbnail.png");
+				Icon previewBild = new ImageIcon(preview.getAbsolutePath().toString());
+				gui.getPreviewPicture().setIcon(previewBild);
+			} catch (OO2CADException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
 		}
 		if(e.getSource() == gui.getDestButton())
 		{
