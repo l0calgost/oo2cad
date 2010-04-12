@@ -106,10 +106,10 @@ public class OO2CADGui extends JFrame
 		gbc.insets = new Insets(2, 2, 2, 2);
 		
 		//Programm Icons
-		Icon iconAdd = new ImageIcon("/Users/tobi/Documents/workspace/2o2cad/src/icons/folder_add.png"); ///2o2cad/src/icons/folder_add.png
-		Icon iconFind = new ImageIcon("../../icons/folder_add.png");
-		Icon iconAccept = new ImageIcon("../../icons/accept.png");		
-		Icon iconStop = new ImageIcon("../../icons/stop.png");
+		Icon iconAdd = new ImageIcon("../../../icons/folder_add.png"); ///2o2cad/src/icons/folder_add.png
+		Icon iconFind = new ImageIcon("../../../icons/folder_add.png");
+		Icon iconAccept = new ImageIcon("../../../icons/accept.png");		
+		Icon iconStop = new ImageIcon("../../../icons/stop.png");
 		
 		//Source und Dest
 		sourcePathLabel = new JLabel("Source path:");
