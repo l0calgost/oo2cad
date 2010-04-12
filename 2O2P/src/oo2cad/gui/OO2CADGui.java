@@ -102,14 +102,16 @@ public class OO2CADGui extends JFrame
 		jf.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.anchor = GridBagConstraints.WEST;
+
 		//Abstand
 		gbc.insets = new Insets(2, 2, 2, 2);
 		
-		//Programm Icons
-		Icon iconAdd = new ImageIcon("../../../icons/folder_add.png"); ///2o2cad/src/icons/folder_add.png
-		Icon iconFind = new ImageIcon("../../../icons/folder_add.png");
-		Icon iconAccept = new ImageIcon("../../../icons/accept.png");		
-		Icon iconStop = new ImageIcon("../../../icons/stop.png");
+		//Programm Icons		
+		Icon iconAdd = new ImageIcon(System.getProperty("user.dir") + "\\icons\\folder_add.png");///2o2cad/src/icons/folder_add.png
+		Icon iconFind = new ImageIcon(System.getProperty("user.dir") + "\\icons\\folder_add.png");
+		Icon iconAccept = new ImageIcon(System.getProperty("user.dir") + "\\icons\\accept.png");		
+		Icon iconStop = new ImageIcon(System.getProperty("user.dir") + "\\icons\\stop.png");
 		
 		//Source und Dest
 		sourcePathLabel = new JLabel("Source path:");
@@ -121,7 +123,7 @@ public class OO2CADGui extends JFrame
 		destButton = new JButton();
 		destButton.setIcon(iconAdd);
 		
-		measureLabelX = new JLabel("Maßstab");
+		measureLabelX = new JLabel("Maﬂstab");
 		measureLabelY = new JLabel(":");
 		
 		offSetLabelHeight = new JLabel("Offset ");
@@ -163,111 +165,76 @@ public class OO2CADGui extends JFrame
 		destButton.addActionListener(actionHandler);
 		
 		convertButton.addActionListener(actionHandler);
-		closeButton.addActionListener(actionHandler);
-		
+		closeButton.addActionListener(actionHandler);		
 		
 		//JFrame
 		
-		//Source
-		gbc.gridx = 0;
-		gbc.gridy = 0;		
-		jf.add(sourcePathLabel,gbc);
+		//Source	
+		jf.add(sourcePathLabel,makegbc(0, 0, 1, 1));
 		
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.weightx = 0.2;
-		//gbc.weightx = 0.5;
-		jf.add(sourcePathTextField, gbc);
+		jf.add(sourcePathTextField, makegbc(1, 0, 5, 1));			
+		jf.add(sourceButton,makegbc(6, 0, 1, 1));
 		
-		gbc.gridx = 3;
-		gbc.gridy = 0;		
-		jf.add(sourceButton,gbc);
+		//Dest	
+		jf.add(destPathLabel,makegbc(0, 1, 1, 1));
 		
+		jf.add(destPathTextField, makegbc(1, 1, 5, 1));
+
+		jf.add(destButton, makegbc(6, 1, 1, 1));		
 		
-		//Dest
-		gbc.gridx = 0;
-		gbc.gridy = 1;		
-		jf.add(destPathLabel,gbc);
+		//Maﬂstab
+		//							X Y WITH HEIGHT
+		jf.add(measureLabelX, makegbc(0, 2, 1, 1));
 		
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		//gbc.weightx = 0.5;
-		jf.add(destPathTextField, gbc);
+		jf.add(measureXTextField, makegbc(1, 2, 2, 1));
 		
-		gbc.gridx = 3;
-		gbc.gridy = 1;
-		//gbc.weightx = 0.5;
-		jf.add(destButton, gbc);
+		jf.add(measureLabelY, makegbc(3, 2, 1, 1));
 		
-		
-		//Maßstab
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		//gbc.weightx = 0.5;
-		jf.add(measureLabelX, gbc);
-		
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		//gbc.weightx = 0.5;
-		jf.add(measureXTextField, gbc);
-		
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-		//gbc.anchor = GridBagConstraints.HORIZONTAL;
-		//gbc.weightx = 0.5;
-		jf.add(measureLabelY, gbc);
-		
-		gbc.gridx = 3;
-		gbc.gridy = 2;
-		//gbc.weightx = 0.5;
-		jf.add(measureYTextField, gbc);
+		jf.add(measureYTextField, makegbc(4, 2, 2, 1));
 		
 		//Offset
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		//gbc.weightx = 0.5;
-		jf.add(offSetLabelHeight, gbc);
+		jf.add(offSetLabelHeight, makegbc(0, 3, 1, 1));
+
+		jf.add(offSetYTextField, makegbc(1, 3, 2, 1));
 		
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		//gbc.weightx = 0.5;
-		jf.add(offSetYTextField, gbc);
+		jf.add(offSetLabelWidth, makegbc(3, 3, 1, 1));
 		
-		gbc.gridx = 2;
-		gbc.gridy = 3;
-		//gbc.weightx = 0.5;
-		jf.add(offSetLabelWidth, gbc);
-		
-		gbc.gridx = 3;
-		gbc.gridy = 3;
-		//gbc.weightx = 0.5;
-		jf.add(offSetXTextField, gbc);
+		jf.add(offSetXTextField, makegbc(4, 3, 2, 1));
 		
 		//Close und Convert Button
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		//gbc.weightx = 0.5;
-		jf.add(convertButton, gbc);
+		jf.add(convertButton, makegbc(0, 4, 1, 1));
 		
-		gbc.gridx = 3;
-		gbc.gridy = 4;
-		//gbc.weightx = 0.5;
-		jf.add(closeButton, gbc);
+		jf.add(closeButton, makegbc(3, 4, 1, 1));
 		
 		//Preview
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		jf.add(previewLabel, gbc);
+		jf.add(previewLabel, makegbc(0, 5, 1, 1));
 		
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		jf.add(previewPicture, gbc);
+		jf.add(previewPicture, makegbc(1, 5, 1, 1));
 		
-		jf.pack();		
+		jf.pack();	
+		
+		//Location
 		jf.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - jf.getSize().width / 2, 
 				Toolkit.getDefaultToolkit().getScreenSize().height / 2 - jf.getSize().height / 2);
 
 		jf.setVisible(true);
+	}
+	
+	private GridBagConstraints makegbc(int x, int y, int width, int height)
+	{
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.gridwidth = width;
+		gbc.gridheight = height;
+		
+		//Anordnung
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.anchor = GridBagConstraints.WEST;
+		//Abstand
+		gbc.insets = new Insets(2, 2, 2, 2);
+		
+		return gbc;
 	}
 
 	
