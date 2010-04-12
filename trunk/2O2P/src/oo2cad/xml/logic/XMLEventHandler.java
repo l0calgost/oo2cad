@@ -1,13 +1,9 @@
 package oo2cad.xml.logic;
 
 import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import oo2cad.config.Config;
-import oo2cad.shapes.AdvancedShape;
 import oo2cad.shapes.Shape;
-import oo2cad.shapes.SimpleShape;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
@@ -17,23 +13,15 @@ import org.xml.sax.helpers.DefaultHandler;
 public class XMLEventHandler extends DefaultHandler
 {
 	//Instanzvariablen
-	private Config config;
-	private boolean insidePage = false;
 	private String shapeName = "";
 	private Shape shape;
 	private Vector<Shape> shapeList = new Vector<Shape>();
-	private float scale;
+	private XMLAttributeHandler attributeHandler = new XMLAttributeHandler();
 	
 	private final String NO_SHAPE_FOUND = "noShapeFound";
 
 	Logger log = Logger.getLogger(XMLEventHandler.class);
-	
-	public XMLEventHandler()
-	{
-		this.config = Config.getInstance();
-		this.scale = config.getScale();
-	}
-	
+		
 	@Override
 	/**
 	 * Holt die Attribute aus dem entpsrechenden XML-Tag ueber das jeweilige
@@ -50,7 +38,7 @@ public class XMLEventHandler extends DefaultHandler
 				
 		 tempShapeName = tempShapeName.replace("draw:", "");
 		
-		 tempShapeName = config.getProperties().getProperty(tempShapeName,NO_SHAPE_FOUND);
+		 tempShapeName = Config.getInstance().getProperties().getProperty(tempShapeName,NO_SHAPE_FOUND);
 		
 		if (!tempShapeName.equals(NO_SHAPE_FOUND))
 		{
@@ -60,14 +48,7 @@ public class XMLEventHandler extends DefaultHandler
 			{
 				shapeName = name;
 				
-				if (shape instanceof SimpleShape)
-				{
-					this.fillSimpleLineShapeWithValues((SimpleShape) shape, attributes);
-				}
-				if (shape instanceof AdvancedShape)
-				{
-					this.fillAdvancedShapeWithValues((AdvancedShape) shape, attributes);
-				}
+				attributeHandler.processAttributes(shape, attributes);
 			}
 
 		}
@@ -126,81 +107,7 @@ public class XMLEventHandler extends DefaultHandler
 		
 		return shapeObject;
 	}
-
-	/**
-	 * Methode um SimpleShapes mit Werten zu befuellen
-	 * @param shape das zu befuellende SimpleShape-Objekt
-	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
-	 */
-	private void fillSimpleLineShapeWithValues(SimpleShape shape, Attributes attributes)
-	{
-		float startX = getAttributesFloatValue(attributes.getValue("svg:x1")) * scale;
-		float startY = getAttributesFloatValue(attributes.getValue("svg:y1")) * scale;
-		float endX   = getAttributesFloatValue(attributes.getValue("svg:x2")) * scale;
-		float endY   = getAttributesFloatValue(attributes.getValue("svg:y2")) * scale;
-		
-		shape.setName(attributes.getValue(0));
-		shape.setStartX(startX);
-		shape.setStartY(startY);
-		shape.setEndX(endX);
-		shape.setEndY(endY);
-	}
-
-	/**
-	 * Methode um AdvancedShapes mit Werten zu befuellen
-	 * @param shape das zu befuellende AdvancedShape-Objekt
-	 * @param attributes das Attributes-Objekt mit den enthaltenen Werten
-	 */
-	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes)
-	{	
-		float x      = getAttributesFloatValue(attributes.getValue("svg:x")) * scale;
-		float y      = getAttributesFloatValue(attributes.getValue("svg:y")) * scale;
-		float width  = getAttributesFloatValue(attributes.getValue("svg:width")) * scale;
-		float height = getAttributesFloatValue(attributes.getValue("svg:height")) * scale;
-		
-		shape.setName(attributes.getValue(0));
-		shape.setX(x);
-		shape.setY(y);
-		shape.setWidth(width);
-		shape.setHeight(height);
-	}
-
-	/**
-	 * Wird benötigt um aus den String-Parametern der xml den entpsprechenden
-	 * Float-Wert zu ermitteln
-	 * 
-	 * @param attribute
-	 *            der Attribut String
-	 * @return der entpsrechende Float-Wert
-	 */
-	private float getAttributesFloatValue(String attribute)
-	{
-		float attributeValue = 0;
-
-		Pattern pattern = Pattern.compile("[+-]?[0-9]+[.]?[0-9]?+");
-
-		if (attribute != null)
-		{
-			Matcher matcher = pattern.matcher(attribute);
-
-			if (matcher.find())
-			{
-				attributeValue = Float.valueOf(matcher.group());
-			}
-		}
-		return attributeValue;
-	}
 	
-	public boolean isInsidePage()
-	{
-		return insidePage;
-	}
-
-	public void setInsidePage(boolean insidePage)
-	{
-		this.insidePage = insidePage;
-	}
-
 	public Vector<Shape> getShapeList()
 	{
 		return shapeList;
