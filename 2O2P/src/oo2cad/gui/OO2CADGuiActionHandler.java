@@ -57,15 +57,20 @@ public class OO2CADGuiActionHandler implements ActionListener
 			
 			/*
 			 * Preview bild anzeigen lassen 
-			 *
+			 */
+			String pfad = "\\\\adv3ksrv\\daten\\schueler\\bki\\I31\\schugt\\Desktop\\preview.png";
 			try {
-				File preview = new Unzip().extractFile(gui.getSourcePathTextField().getText(), "C:\\" , "thumbnail.png");
+				File preview = new Unzip().extractFile(gui.getSourcePathTextField().getText(), pfad , "Thumbnails/thumbnail.png");
 				Icon previewBild = new ImageIcon(preview.getAbsolutePath().toString());
-				gui.getPreviewPicture().setIcon(previewBild);
+				gui.setPreviewPictureImage(previewBild);
+				//Datei wieder löchen
+				File filePreview = new File(pfad);
+				filePreview.delete();
+				
 			} catch (OO2CADException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}*/
+			}
 		}
 		if(e.getSource() == gui.getDestButton())
 		{

@@ -1,5 +1,6 @@
 package oo2cad.gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.MaskFormatter;
@@ -113,11 +115,14 @@ public class OO2CADGui extends JFrame
 		Icon iconAccept = new ImageIcon(System.getProperty("user.dir") + "\\icons\\accept.png");		
 		Icon iconStop = new ImageIcon(System.getProperty("user.dir") + "\\icons\\stop.png");
 		
+		//Previw Picture
+		Icon preview = new ImageIcon(System.getProperty("user.dir") + "\\icons\\Preview.png");
+				
 		//Source und Dest
 		sourcePathLabel = new JLabel("Source path:");
 		destPathLabel = new JLabel("Dest path:");
 		//Button Labeln		
-		sourceButton = new JButton("select");
+		sourceButton = new JButton();
 		sourceButton.setIcon(iconFind);
 		
 		destButton = new JButton();
@@ -141,6 +146,9 @@ public class OO2CADGui extends JFrame
 		 */
 		previewLabel = new JLabel("Preview:");
 		previewPicture = new JLabel();
+		previewPicture.setIcon(preview);
+		LineBorder border = new LineBorder(Color.BLACK);
+		previewPicture.setBorder(border);
 		
 		//TextFelder erzeugen
 		sourcePathTextField = new JTextField();
@@ -201,16 +209,16 @@ public class OO2CADGui extends JFrame
 		
 		jf.add(offSetXTextField, makegbc(4, 3, 2, 1));
 		
-		//Close und Convert Button
-		jf.add(convertButton, makegbc(0, 4, 1, 1));
-		
-		jf.add(closeButton, makegbc(3, 4, 1, 1));
-		
 		//Preview
-		jf.add(previewLabel, makegbc(0, 5, 1, 1));
+		jf.add(previewLabel, makegbc(0, 4, 1, 1));
 		
-		jf.add(previewPicture, makegbc(1, 5, 1, 1));
+		jf.add(previewPicture, makegbc(1, 4, 5, 2));
 		
+		//Close und Convert Button
+		jf.add(convertButton, makegbc(2, 6, 1, 1));
+		
+		jf.add(closeButton, makegbc(4, 6, 1, 1));
+						
 		jf.pack();	
 		
 		//Location
@@ -236,12 +244,9 @@ public class OO2CADGui extends JFrame
 		
 		return gbc;
 	}
-
-	
-	
-	
-	public void setPreviewPicture(JLabel previewPicture) {
-		this.previewPicture = previewPicture;
+		
+	public void setPreviewPictureImage(Icon image) {
+		this.previewPicture.setIcon(image);
 	}
 	
 	
