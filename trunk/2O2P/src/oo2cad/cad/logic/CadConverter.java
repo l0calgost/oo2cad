@@ -47,7 +47,7 @@ public class CadConverter
 			
 			if (shape instanceof Circle)
 			{
-				objectArray = engeco.convertCircle((Circle) shape);
+				//objectArray = engeco.convertCircle((Circle) shape);
 			}
 			
 			if(shape instanceof Ellipse)
