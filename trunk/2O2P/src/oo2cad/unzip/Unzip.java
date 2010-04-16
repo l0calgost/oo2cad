@@ -26,22 +26,16 @@ public class Unzip
 	//Zip Buffer
 	private final byte[] buffer = new byte[ 0xFFFF ]; 
 	
-	public File extractFile(String source, String dest, String fileOO /* Open Office Datei z.B. content.xml */) throws OO2CADException
+	public InputStream extractFile(String source, String fileOO /* Open Office Datei z.B. content.xml */) throws OO2CADException
 	{
-		int fileLength = 0;
-		
-		//Datei in Ausgabe schreiben
-		File ooXmlContent = new File(dest);
+		//Rückgabe
 		InputStream ooXmlContentIs = null;
 		
 		try
 		{
 			//Zip
 			ZipFile ooZipFile = new ZipFile(source);
-			Enumeration<? extends ZipEntry> ooZipEntrys = ooZipFile.entries();
-			
-			//File Schreiben
-			FileOutputStream ooXmlContentFo = new FileOutputStream(ooXmlContent);
+			Enumeration<? extends ZipEntry> ooZipEntrys = ooZipFile.entries();						
 			
 			while(ooZipEntrys.hasMoreElements())
 			{
@@ -55,19 +49,15 @@ public class Unzip
 					ooXmlContentIs = ooZipFile.getInputStream(ooZipEntryInFile);
 				}
 			}
-			
-			//Input Sream zurück in Datei schreiben
-			while ((fileLength = ooXmlContentIs.read(buffer)) != -1)
-			{
-				ooXmlContentFo.write(buffer, 0, fileLength);
-			}
 		}		
 		catch (IOException e) 
 		{			
+			//Log4j
+			log.error(OO2CADExceptionConstants.UNZIP_ERROR);
 			throw new OO2CADException(OO2CADExceptionConstants.UNZIP_ERROR);	
 		}	
 		
 		//Datei zurŸckliefern Typ:File
-		return ooXmlContent;
+		return ooXmlContentIs;
 	}
 }

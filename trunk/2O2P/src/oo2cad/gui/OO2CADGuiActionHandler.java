@@ -1,9 +1,13 @@
 package oo2cad.gui;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -35,7 +39,7 @@ public class OO2CADGuiActionHandler implements ActionListener
 			jfSource.setDialogType(JFileChooser.OPEN_DIALOG);
 			jfSource.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			
-			File file = new File("C:\\");
+			File file = new File(gui.getDestPathTextField().getText());
 			jfSource.setCurrentDirectory(file);
 			jfSource.setAcceptAllFileFilterUsed(false);
 			
@@ -49,27 +53,31 @@ public class OO2CADGuiActionHandler implements ActionListener
 			if(jfSource.getSelectedFile() != null)
 			{
 				gui.getSourcePathTextField().setText(jfSource.getSelectedFile().toString());
+				
+				/*
+				 * Preview bild anzeigen lassen 
+				 */
+				try {
+					InputStream preview = new Unzip().extractFile(gui.getSourcePathTextField().getText(), "Thumbnails/thumbnail.png");
+					Icon previewBild;
+					try
+					{
+						previewBild = new ImageIcon(ImageIO.read(preview));
+						gui.setPreviewPictureImage(previewBild);
+					} catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				} catch (OO2CADException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else
 			{
 				;
-			}
-			
-			/*
-			 * Preview bild anzeigen lassen 
-			 */
-			String pfad = "\\\\adv3ksrv\\daten\\schueler\\bki\\I31\\schugt\\Desktop\\preview.png";
-			try {
-				File preview = new Unzip().extractFile(gui.getSourcePathTextField().getText(), pfad , "Thumbnails/thumbnail.png");
-				Icon previewBild = new ImageIcon(preview.getAbsolutePath().toString());
-				gui.setPreviewPictureImage(previewBild);
-				//Datei wieder löchen
-				File filePreview = new File(pfad);
-				filePreview.delete();
-				
-			} catch (OO2CADException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 		}
 		if(e.getSource() == gui.getDestButton())
@@ -79,7 +87,7 @@ public class OO2CADGuiActionHandler implements ActionListener
 			jfDest.setDialogType(JFileChooser.SAVE_DIALOG);
 			jfDest.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 						
-			File file = new File("C:\\");
+			File file = new File(gui.getSourcePathTextField().getText());
 			jfDest.setCurrentDirectory(file);
 			
 			//File filter
