@@ -1,6 +1,7 @@
 package oo2cad;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Vector;
 
 import oo2cad.cad.logic.CadHandler;
@@ -63,7 +64,7 @@ public class OO2CAD {
 		try {
 			
 			// aus der *.odg-Datei die content.xml holen	
-			File ooXmlContent =	uz.extractFile(config.getSourceFilePath(), config.getDestFilePath(), "content.xml");
+			InputStream ooXmlContent =	uz.extractFile(config.getSourceFilePath(), "content.xml");
 			
 			// File ooXmlContent = uz.extractFile(datei,Config.XML_FILE_NAME);
 		

@@ -2,6 +2,7 @@ package oo2cad.xml;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -25,7 +26,7 @@ public class OOXMLParser {
 		xmlHandler = new XMLEventHandler();
 	}
 	
-	public void parseFile(File file) throws OO2CADException {
+	public void parseFile(InputStream file) throws OO2CADException {
 
 		//get a factory
 		SAXParserFactory spf = SAXParserFactory.newInstance();

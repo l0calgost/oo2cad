@@ -1,6 +1,7 @@
 package oo2cad.xml;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Vector;
 
 import oo2cad.exception.OO2CADException;
@@ -22,7 +23,7 @@ public class XMLHandler
 	 * @param file die zu parsende XML-Datei
 	 * @throws OO2CADException
 	 */
-	public void parseFile(File file) throws OO2CADException 
+	public void parseFile(InputStream file) throws OO2CADException 
 	{
 		parser = new OOXMLParser();
 		
