@@ -75,8 +75,8 @@ public class XMLAttributeHandler
 	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes)
 	{	
 		shape.setName(attributes.getValue(0));
-		shape.setWidth(getAttributesFloatValue(attributes.getValue("svg:width")));
-		shape.setHeight(getAttributesFloatValue(attributes.getValue("svg:height")));
+		shape.setWidth(getAttributesFloatValue(attributes.getValue("svg:width")) * scale);
+		shape.setHeight(getAttributesFloatValue(attributes.getValue("svg:height")) * scale);
 		
 		String transformation = attributes.getValue("draw:transform");
 		
