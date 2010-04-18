@@ -1,5 +1,8 @@
 package oo2cad.shapes;
 
+/*
+ * Test
+ */
 public class AdvancedShape extends Shape
 {
 
