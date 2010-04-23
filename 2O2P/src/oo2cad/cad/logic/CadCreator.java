@@ -7,6 +7,7 @@ import java.io.IOException;
 import oo2cad.cad.constants.CadConstants;
 import oo2cad.cad.objects.CadBaseObject;
 import oo2cad.cad.objects.CadBow;
+import oo2cad.cad.objects.CadEllipse;
 import oo2cad.cad.objects.CadLine;
 import oo2cad.cad.objects.ObjectBox;
 import oo2cad.exception.OO2CADException;
@@ -55,11 +56,21 @@ public class CadCreator
 					bw.newLine();
 					
 				}
+				
 				if (cadObject instanceof CadBow)
 				{
 					CadBow bow = (CadBow) cadObject;
 					
 					bw.write(CadConstants.DRAW_ABSOLUT + " " + bow.getRadiusX() + ", " + bow.getRadiusY() + ", " + bow.getAngleStart() + ", " + bow.getAngleEnd());
+					bw.newLine();
+				}
+				if (cadObject instanceof CadEllipse)
+				{
+					CadEllipse ellipse = (CadEllipse) cadObject;
+					
+					bw.write(CadConstants.MOVE_ABSOLUT + " " + ellipse.getCenterX() + ", " + ellipse.getCenterY());
+					bw.newLine();
+					bw.write(CadConstants.DRAW_ELLIPSE + " " + ellipse.getXRadius() + ", " + ellipse.getYRadius());
 					bw.newLine();
 				}
 				
