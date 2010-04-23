@@ -155,18 +155,18 @@ public class OO2CADGui extends JFrame
 		destPathTextField = new JTextField();			
 		
 		measureXTextField = new JTextField();		
-		measureXTextField.setText(Float.toString(config.getScaleInc()));
+		measureXTextField.setText(Double.toString(config.getScaleInc()));
 		//Eingabeprüfen
 		measureXTextField.getDocument().addDocumentListener(new OO2CADTextFieldListener());
 		
 		measureYTextField = new JTextField();
-		measureYTextField.setText(Float.toString(config.getScaleDec()));
+		measureYTextField.setText(Double.toString(config.getScaleDec()));
 		
 		offSetYTextField = new JTextField();
-		offSetYTextField.setText(Float.toString(config.getOffSetY()));
+		offSetYTextField.setText(Double.toString(config.getOffSetY()));
 		
 		offSetXTextField = new JTextField();
-		offSetXTextField.setText(Float.toString(config.getOffSetY()));
+		offSetXTextField.setText(Double.toString(config.getOffSetY()));
 		
 		//ActionListener's		
 		sourceButton.addActionListener(actionHandler);

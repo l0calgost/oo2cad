@@ -4,13 +4,13 @@ import java.util.Vector;
 
 public class ObjectBox 
 {
-	private float xMin;
-	private float xMax;
-	private float yMin;
-	private float yMax;
+	private double xMin;
+	private double xMax;
+	private double yMin;
+	private double yMax;
 	private Vector<CadBaseObject> cadObjectList;
 	
-	public ObjectBox(float xMin, float xMax, float yMin, float yMax, Vector<CadBaseObject> cadObjectList)
+	public ObjectBox(double xMin, double xMax, double yMin, double yMax, Vector<CadBaseObject> cadObjectList)
 	{
 		this.xMin = xMin;
 		this.xMax = xMax;
@@ -29,28 +29,28 @@ public class ObjectBox
 		this.cadObjectList = cadObjectList;
 	}
 		
-	public float getxMin() {
+	public double getxMin() {
 		return xMin;
 	}
-	public void setxMin(float xMin) {
+	public void setxMin(double xMin) {
 		this.xMin = xMin;
 	}
-	public float getxMax() {
+	public double getxMax() {
 		return xMax;
 	}
-	public void setxMax(float xMax) {
+	public void setxMax(double xMax) {
 		this.xMax = xMax;
 	}
-	public float getyMin() {
+	public double getyMin() {
 		return yMin;
 	}
-	public void setyMin(float yMin) {
+	public void setyMin(double yMin) {
 		this.yMin = yMin;
 	}
-	public float getyMax() {
+	public double getyMax() {
 		return yMax;
 	}
-	public void setyMax(float yMax) {
+	public void setyMax(double yMax) {
 		this.yMax = yMax;
 	}
 }

@@ -38,7 +38,7 @@ public class XMLTransformListHandler implements TransformListHandler
 	@Override
 	public void rotate(float theta) throws ParseException
 	{
-		float xWidth = shape.getWidth();
+		float xWidth = (float) shape.getWidth();
 		float yWidth = 0;
 		
 		float rotation = (float) Math.toDegrees(theta);	
@@ -99,7 +99,7 @@ public class XMLTransformListHandler implements TransformListHandler
 	@Override
 	public void startTransformList() throws ParseException
 	{
-		this.scale = Config.getInstance().getScale();
+		this.scale = (float) Config.getInstance().getScale();
 		//shape.hasTransformation(true);
 		
 	}

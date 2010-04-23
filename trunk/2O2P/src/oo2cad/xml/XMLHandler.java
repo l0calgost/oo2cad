@@ -1,13 +1,11 @@
 package oo2cad.xml;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Vector;
 
 import oo2cad.exception.OO2CADException;
 import oo2cad.exception.OO2CADExceptionConstants;
 import oo2cad.shapes.Shape;
-import oo2cad.xml.OOXMLParser;
 
 import org.apache.log4j.Logger;
 

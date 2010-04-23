@@ -16,15 +16,15 @@ public class ObjectBoxValueGetter
 	private Vector<Shape> shapeList;
 	
 	//Vorbelegung für die MAX/MIN werte
-	private float tempxMin = Float.MAX_VALUE;
-	private float tempxMax = Float.MIN_NORMAL;
-	private float tempyMin = Float.MAX_VALUE;
-	private float tempyMax = Float.MIN_NORMAL;
+	private double tempxMin = Double.MAX_VALUE;
+	private double tempxMax = Double.MIN_NORMAL;
+	private double tempyMin = Double.MAX_VALUE;
+	private double tempyMax = Double.MIN_NORMAL;
 	
-	private float xMin;
-	private float xMax;
-	private float yMin;
-	private float yMax ;
+	private double xMin;
+	private double xMax;
+	private double yMin;
+	private double yMax ;
 
 	public ObjectBoxValueGetter(Vector<Shape> shapeList)
 	{
@@ -75,7 +75,7 @@ public class ObjectBoxValueGetter
 		yMax = tempyMin;		
 	}
 	
-	private void setMaxValuesAdvancedShapes(float maxX, float maxY, float width, float height)
+	private void setMaxValuesAdvancedShapes(double maxX, double maxY, double width, double height)
 	{
 		//XMAX
 		if((getMaxValue(maxX, width)) > tempxMax)
@@ -89,7 +89,7 @@ public class ObjectBoxValueGetter
 		}
 	}
 	
-	private void setMaxValuesSimpleShapes(float maxX, float maxY)
+	private void setMaxValuesSimpleShapes(double maxX, double maxY)
 	{
 		//XMAX
 		if(maxX > tempxMax)
@@ -103,7 +103,7 @@ public class ObjectBoxValueGetter
 		}
 	}
 	
-	private void setMinValues(float minX, float minY)
+	private void setMinValues(double minX, double minY)
 	{
 		//XMIN
 		if(minX < tempxMin)
@@ -117,7 +117,7 @@ public class ObjectBoxValueGetter
 		}
 	}
 	
-	private float getMaxValue(float xyValue, float hwSize)
+	private double getMaxValue(double xyValue, double hwSize)
 	{
 		return xyValue+hwSize;
 	}
@@ -126,62 +126,62 @@ public class ObjectBoxValueGetter
 		return shapeList;
 	}
 
-	public float getTempxMin()
+	public double getTempxMin()
 	{
 		return tempxMin;
 	}
 
-	public void setTempxMin(float tempxMin)
+	public void setTempxMin(double tempxMin)
 	{
 		this.tempxMin = tempxMin;
 	}
 
-	public float getTempxMax()
+	public double getTempxMax()
 	{
 		return tempxMax;
 	}
 
-	public void setTempxMax(float tempxMax)
+	public void setTempxMax(double tempxMax)
 	{
 		this.tempxMax = tempxMax;
 	}
 
-	public float getTempyMin()
+	public double getTempyMin()
 	{
 		return tempyMin;
 	}
 
-	public void setTempyMin(float tempyMin)
+	public void setTempyMin(double tempyMin)
 	{
 		this.tempyMin = tempyMin;
 	}
 
-	public float getTempyMax()
+	public double getTempyMax()
 	{
 		return tempyMax;
 	}
 
-	public void setTempyMax(float tempyMax)
+	public void setTempyMax(double tempyMax)
 	{
 		this.tempyMax = tempyMax;
 	}
 
-	public float getxMin()
+	public double getxMin()
 	{
 		return xMin;
 	}
 
-	public float getxMax()
+	public double getxMax()
 	{
 		return xMax;
 	}
 
-	public float getyMin()
+	public double getyMin()
 	{
 		return yMin;
 	}
 
-	public float getyMax()
+	public double getyMax()
 	{
 		return yMax;
 	}

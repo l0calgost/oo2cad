@@ -1,6 +1,5 @@
 package oo2cad;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Vector;
 

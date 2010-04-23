@@ -7,10 +7,10 @@ package oo2cad.cad.objects;
  */
 public class CadLine extends CadBaseObject
 {	
-	private float endX;
-	private float endY;
+	private double endX;
+	private double endY;
 	
-	public CadLine (float startX, float startY, float endX, float endY)
+	public CadLine (double startX, double startY, double endX, double endY)
 	{
 		super.setStartX(startX);
 		super.setStartY(startY);
@@ -18,22 +18,22 @@ public class CadLine extends CadBaseObject
 		this.endY   = endY;
 	}
 	
-	public float getEndX()
+	public double getEndX()
 	{
 		return endX;
 	}
 
-	public void setEndX(float endX)
+	public void setEndX(double endX)
 	{
 		this.endX = endX;
 	}
 
-	public float getEndY()
+	public double getEndY()
 	{
 		return endY;
 	}
 
-	public void setEndY(float endY)
+	public void setEndY(double endY)
 	{
 		this.endY = endY;
 	}

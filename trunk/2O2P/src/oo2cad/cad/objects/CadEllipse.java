@@ -2,16 +2,16 @@ package oo2cad.cad.objects;
 
 public class CadEllipse extends CadBaseObject
 {
-	private float horizontalX;
-	private float horizontalY;
-	private float verticalX;
-	private float verticalY;
+	private double horizontalX;
+	private double horizontalY;
+	private double verticalX;
+	private double verticalY;
 	
-	private float centerX;
-	private float centerY;
+	private double centerX;
+	private double centerY;
 	
 	
-	public CadEllipse(float horizontalX, float horizontalY, float verticalX, float verticalY, float centerX, float centerY)
+	public CadEllipse(double horizontalX, double horizontalY, double verticalX, double verticalY, double centerX, double centerY)
 	{
 		this.horizontalX = horizontalX;
 		this.horizontalY = horizontalY;
@@ -21,57 +21,57 @@ public class CadEllipse extends CadBaseObject
 		this.centerY = centerY;
 	}
 	
-	public float getCenterX()
+	public double getCenterX()
 	{
 		return centerX;
 	}
 
 
 
-	public void setCenterX(float centerX)
+	public void setCenterX(double centerX)
 	{
 		this.centerX = centerX;
 	}
 
-	public float getCenterY()
+	public double getCenterY()
 	{
 		return centerY;
 	}
 
-	public void setCenterY(float centerY)
+	public void setCenterY(double centerY)
 	{
 		this.centerY = centerY;
 	}
 
-	public float getHorizontalX()
+	public double getHorizontalX()
 	{
 		return horizontalX;
 	}
-	public void setHorizontalX(float horizontalX)
+	public void setHorizontalX(double horizontalX)
 	{
 		this.horizontalX = horizontalX;
 	}
-	public float getHorizontalY()
+	public double getHorizontalY()
 	{
 		return horizontalY;
 	}
-	public void setHorizontalY(float horizontalY)
+	public void setHorizontalY(double horizontalY)
 	{
 		this.horizontalY = horizontalY;
 	}
-	public float getVerticalX()
+	public double getVerticalX()
 	{
 		return verticalX;
 	}
-	public void setVerticalX(float verticalX)
+	public void setVerticalX(double verticalX)
 	{
 		this.verticalX = verticalX;
 	}
-	public float getVerticalY()
+	public double getVerticalY()
 	{
 		return verticalY;
 	}
-	public void setVerticalY(float verticalY)
+	public void setVerticalY(double verticalY)
 	{
 		this.verticalY = verticalY;
 	}

@@ -8,22 +8,22 @@ package oo2cad.cad.objects;
  */
 public class CadBaseObject
 {
-	private float startX;
-	private float startY;
+	private double startX;
+	private double startY;
 	
-	public float getStartX()
+	public double getStartX()
 	{
 		return startX;
 	}
-	public void setStartX(float startX)
+	public void setStartX(double startX)
 	{
 		this.startX = startX;
 	}
-	public float getStartY()
+	public double getStartY()
 	{
 		return startY;
 	}
-	public void setStartY(float startY)
+	public void setStartY(double startY)
 	{
 		this.startY = startY;
 	}
