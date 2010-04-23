@@ -9,11 +9,11 @@ public class EnhancedGeometryConverter
 	public CadBaseObject[] convertEllipse(Ellipse ellipse)
 	{
 		CadBaseObject[] ellipseArray = new CadBaseObject[1];
-		CadEllipse cadEllipse = new CadEllipse(ellipse.getX(), ellipse.getY() + (ellipse.getHeight()/2), ellipse.getX() + (ellipse.getWidth()/2),ellipse.getY(), 0, 0);
+		CadEllipse cadEllipse = new CadEllipse((ellipse.getWidth() / 2), (ellipse.getHeight() / 2));
 		//Center X -> X wert setzen
-		cadEllipse.setCenterX(cadEllipse.getHorizontalX() + (ellipse.getWidth() / 2));
+		cadEllipse.setCenterX(ellipse.getX() + (ellipse.getWidth() / 2));
 		//Center Y -> Y wert setzen
-		cadEllipse.setCenterY(cadEllipse.getVerticalY() + (ellipse.getHeight() / 2));
+		cadEllipse.setCenterY(ellipse.getY() + (ellipse.getHeight() / 2));
 		ellipseArray[0] = cadEllipse;
 		return ellipseArray;
 	}
