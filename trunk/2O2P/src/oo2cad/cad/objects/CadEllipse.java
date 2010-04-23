@@ -2,21 +2,23 @@ package oo2cad.cad.objects;
 
 public class CadEllipse extends CadBaseObject
 {
-	private double horizontalX;
-	private double horizontalY;
-	private double verticalX;
-	private double verticalY;
+	private double xRadius;
+	private double yRadius;
 	
 	private double centerX;
 	private double centerY;
 	
 	
-	public CadEllipse(double horizontalX, double horizontalY, double verticalX, double verticalY, double centerX, double centerY)
+	public CadEllipse(double xRadius, double yRadius)
 	{
-		this.horizontalX = horizontalX;
-		this.horizontalY = horizontalY;
-		this.verticalX = verticalX;
-		this.verticalY = verticalY;
+		this.xRadius = xRadius;
+		this.yRadius = yRadius;
+	}
+	
+	public CadEllipse(double xRadius, double yRadius, double centerX, double centerY)
+	{
+		this.xRadius = xRadius;
+		this.yRadius = yRadius;
 		this.centerX = centerX;
 		this.centerY = centerY;
 	}
@@ -25,8 +27,6 @@ public class CadEllipse extends CadBaseObject
 	{
 		return centerX;
 	}
-
-
 
 	public void setCenterX(double centerX)
 	{
@@ -43,38 +43,24 @@ public class CadEllipse extends CadBaseObject
 		this.centerY = centerY;
 	}
 
-	public double getHorizontalX()
+	public double getXRadius()
 	{
-		return horizontalX;
+		return xRadius;
 	}
-	public void setHorizontalX(double horizontalX)
+
+	public void setXRadius(double radius)
 	{
-		this.horizontalX = horizontalX;
+		xRadius = radius;
 	}
-	public double getHorizontalY()
+
+	public double getYRadius()
 	{
-		return horizontalY;
+		return yRadius;
 	}
-	public void setHorizontalY(double horizontalY)
+
+	public void setYRadius(double radius)
 	{
-		this.horizontalY = horizontalY;
+		yRadius = radius;
 	}
-	public double getVerticalX()
-	{
-		return verticalX;
-	}
-	public void setVerticalX(double verticalX)
-	{
-		this.verticalX = verticalX;
-	}
-	public double getVerticalY()
-	{
-		return verticalY;
-	}
-	public void setVerticalY(double verticalY)
-	{
-		this.verticalY = verticalY;
-	}
-	
 	
 }
