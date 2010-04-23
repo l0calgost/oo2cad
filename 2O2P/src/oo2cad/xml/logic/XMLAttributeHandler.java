@@ -21,11 +21,11 @@ import org.xml.sax.Attributes;
  */
 public class XMLAttributeHandler
 {
-	private float scale;
-	private float viewBoxX1;
-	private float viewBoxY1;
-	private float viewBoxX2;
-	private float viewBoxY2;
+	private double scale;
+	private double viewBoxX1;
+	private double viewBoxY1;
+	private double viewBoxX2;
+	private double viewBoxY2;
 	
 	XMLTransformListHandler transformationHandler;
 	XMLPathHandler pathHandler;
@@ -55,10 +55,10 @@ public class XMLAttributeHandler
 	 */
 	private void fillSimpleLineShapeWithValues(SimpleShape shape, Attributes attributes)
 	{
-		float startX = getAttributesFloatValue(attributes.getValue("svg:x1")) * scale;
-		float startY = getAttributesFloatValue(attributes.getValue("svg:y1")) * scale;
-		float endX   = getAttributesFloatValue(attributes.getValue("svg:x2")) * scale;
-		float endY   = getAttributesFloatValue(attributes.getValue("svg:y2")) * scale;
+		double startX = getAttributesdoubleValue(attributes.getValue("svg:x1")) * scale;
+		double startY = getAttributesdoubleValue(attributes.getValue("svg:y1")) * scale;
+		double endX   = getAttributesdoubleValue(attributes.getValue("svg:x2")) * scale;
+		double endY   = getAttributesdoubleValue(attributes.getValue("svg:y2")) * scale;
 		
 		shape.setName(attributes.getValue(0));
 		shape.setStartX(startX);
@@ -75,8 +75,8 @@ public class XMLAttributeHandler
 	private void fillAdvancedShapeWithValues(AdvancedShape shape, Attributes attributes)
 	{	
 		shape.setName(attributes.getValue(0));
-		shape.setWidth(getAttributesFloatValue(attributes.getValue("svg:width")) * scale);
-		shape.setHeight(getAttributesFloatValue(attributes.getValue("svg:height")) * scale);
+		shape.setWidth(getAttributesdoubleValue(attributes.getValue("svg:width")) * scale);
+		shape.setHeight(getAttributesdoubleValue(attributes.getValue("svg:height")) * scale);
 		
 		String transformation = attributes.getValue("draw:transform");
 		
@@ -90,8 +90,8 @@ public class XMLAttributeHandler
 		}
 		else
 		{
-			shape.setX(getAttributesFloatValue(attributes.getValue("svg:x")) * scale);
-			shape.setY(getAttributesFloatValue(attributes.getValue("svg:y")) * scale);
+			shape.setX(getAttributesdoubleValue(attributes.getValue("svg:x")) * scale);
+			shape.setY(getAttributesdoubleValue(attributes.getValue("svg:y")) * scale);
 		}
 		
 		String viewBox = attributes.getValue("svg:viewBox");
@@ -100,10 +100,10 @@ public class XMLAttributeHandler
 		{
 			String[] viewBoxValues = viewBox.split(" ");
 			
-			viewBoxX1 = Float.valueOf(viewBoxValues[0]);
-			viewBoxY1 = Float.valueOf(viewBoxValues[1]);
-			viewBoxX2 = Float.valueOf(viewBoxValues[2]);
-			viewBoxY2 = Float.valueOf(viewBoxValues[3]);
+			viewBoxX1 = Double.valueOf(viewBoxValues[0]);
+			viewBoxY1 = Double.valueOf(viewBoxValues[1]);
+			viewBoxX2 = Double.valueOf(viewBoxValues[2]);
+			viewBoxY2 = Double.valueOf(viewBoxValues[3]);
 			
 		}
 		
@@ -172,15 +172,15 @@ public class XMLAttributeHandler
 
 	/**
 	 * Wird benötigt um aus den String-Parametern der xml den entpsprechenden
-	 * Float-Wert zu ermitteln
+	 * double-Wert zu ermitteln
 	 * 
 	 * @param attribute
 	 *            der Attribut String
-	 * @return der entpsrechende Float-Wert
+	 * @return der entpsrechende double-Wert
 	 */
-	private float getAttributesFloatValue(String attribute)
+	private double getAttributesdoubleValue(String attribute)
 	{
-		float attributeValue = 0;
+		double attributeValue = 0;
 
 		Pattern pattern = Pattern.compile("[+-]?[0-9]+[.]?[0-9]?+");
 
@@ -190,18 +190,18 @@ public class XMLAttributeHandler
 
 			if (matcher.find())
 			{
-				attributeValue = Float.valueOf(matcher.group());
+				attributeValue = Double.valueOf(matcher.group());
 			}
 		}
 		return attributeValue;
 	}
 
-	public float getScale()
+	public double getScale()
 	{
 		return scale;
 	}
 
-	public void setScale(float scale)
+	public void setScale(double scale)
 	{
 		this.scale = scale;
 	}

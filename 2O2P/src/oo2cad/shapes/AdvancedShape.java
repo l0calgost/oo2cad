@@ -6,40 +6,40 @@ package oo2cad.shapes;
 public class AdvancedShape extends Shape
 {
 
-	private float x;
-	private float y;
-	private float height;
-	private float width;
+	private double x;
+	private double y;
+	private double height;
+	private double width;
 	
-	public float getX()
+	public double getX()
 	{
 		return x;
 	}
-	public void setX(float x)
+	public void setX(double x)
 	{
 		this.x = x;
 	}
-	public float getY()
+	public double getY()
 	{
 		return y;
 	}
-	public void setY(float y)
+	public void setY(double y)
 	{
 		this.y = y;
 	}
-	public float getHeight()
+	public double getHeight()
 	{
 		return height;
 	}
-	public void setHeight(float height)
+	public void setHeight(double height)
 	{
 		this.height = height;
 	}
-	public float getWidth()
+	public double getWidth()
 	{
 		return width;
 	}
-	public void setWidth(float width)
+	public void setWidth(double width)
 	{
 		this.width = width;
 	}

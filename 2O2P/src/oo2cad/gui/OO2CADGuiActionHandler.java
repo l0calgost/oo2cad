@@ -1,6 +1,5 @@
 package oo2cad.gui;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -125,10 +124,10 @@ public class OO2CADGuiActionHandler implements ActionListener
 				Config config = Config.getInstance();
 				config.setSourceFilePath(gui.getSourcePathTextField().getText());
 				config.setDestFilePath(gui.getDestPathTextField().getText());
-				config.setScaleInc(Float.parseFloat(gui.getMeasureXTextField().getText()));
-				config.setScaleDec(Float.parseFloat(gui.getMeasureYTextField().getText()));
-				config.setOffSetX(Float.parseFloat(gui.getOffSetWidthTextField().getText()));
-				config.setOffSetY(Float.parseFloat(gui.getOffSetHeightTextField().getText()));
+				config.setScaleInc(Double.parseDouble(gui.getMeasureXTextField().getText()));
+				config.setScaleDec(Double.parseDouble(gui.getMeasureYTextField().getText()));
+				config.setOffSetX(Double.parseDouble(gui.getOffSetWidthTextField().getText()));
+				config.setOffSetY(Double.parseDouble(gui.getOffSetHeightTextField().getText()));
 				OO2CAD.start();
 			}
 			else

@@ -19,11 +19,11 @@ public class CoordinateConverter
 {
 	private Config config;
 	
-	private float xReference;
-	private float yReference;
-	private float offSetX;
-	private float offSetY;
-	private float unit;
+	private double xReference;
+	private double yReference;
+	private double offSetX;
+	private double offSetY;
+	private double unit;
 	
 	public CoordinateConverter()
 	{

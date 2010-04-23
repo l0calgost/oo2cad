@@ -1,9 +1,7 @@
 package oo2cad.cad.logic.shapes;
 
 import oo2cad.cad.objects.CadBaseObject;
-import oo2cad.cad.objects.CadBow;
 import oo2cad.cad.objects.CadEllipse;
-import oo2cad.shapes.Circle;
 import oo2cad.shapes.Ellipse;
 
 public class EnhancedGeometryConverter

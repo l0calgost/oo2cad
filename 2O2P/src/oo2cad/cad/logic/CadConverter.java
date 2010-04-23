@@ -15,7 +15,6 @@ import oo2cad.shapes.Polygon;
 import oo2cad.shapes.Polyline;
 import oo2cad.shapes.Rectangle;
 import oo2cad.shapes.Shape;
-import oo2cad.shapes.TextBox;
 
 /**
  * Klasse, die die OpenOffice-XML-Objekten in Cad-Objekte umwandelt

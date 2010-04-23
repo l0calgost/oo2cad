@@ -1,6 +1,5 @@
 package oo2cad.config;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -20,10 +19,10 @@ public class Config {
 	private static Config config = new Config();
 	
 	//Standartwerte für GUI
-	private float scaleInc = 1;
-	private float scaleDec = 1;
-	private float offSetX = 0;
-	private float offSetY = 0;
+	private double scaleInc = 1;
+	private double scaleDec = 1;
+	private double offSetX = 0;
+	private double offSetY = 0;
 	
 	private String destFilePath;
 	private String sourceFilePath;
@@ -66,17 +65,17 @@ public class Config {
 		this.properties = properties;
 	}
 
-	public float getScale()
+	public double getScale()
 	{
 		return scaleInc / scaleDec;
 	}
 	
-	public void setScaleInc(float scaleInc)
+	public void setScaleInc(double scaleInc)
 	{
 		this.scaleInc = scaleInc;
 	}
 
-	public void setScaleDec(float scaleDec)
+	public void setScaleDec(double scaleDec)
 	{
 		this.scaleDec = scaleDec;
 	}
@@ -101,32 +100,32 @@ public class Config {
 		this.sourceFilePath = sourceFilePath;
 	}
 
-	public float getOffSetX()
+	public double getOffSetX()
 	{
 		return offSetX;
 	}
 
-	public void setOffSetX(float offSetX)
+	public void setOffSetX(double offSetX)
 	{
 		this.offSetX = offSetX;
 	}
 
-	public float getOffSetY()
+	public double getOffSetY()
 	{
 		return offSetY;
 	}
 
-	public void setOffSetY(float offSetY)
+	public void setOffSetY(double offSetY)
 	{
 		this.offSetY = offSetY;
 	}
 
-	public float getScaleInc()
+	public double getScaleInc()
 	{
 		return scaleInc;
 	}
 
-	public float getScaleDec()
+	public double getScaleDec()
 	{
 		return scaleDec;
 	}

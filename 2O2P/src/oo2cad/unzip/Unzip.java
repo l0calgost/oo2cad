@@ -6,8 +6,6 @@
  */
 package oo2cad.unzip;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -24,7 +22,7 @@ public class Unzip
 	private Logger log = Logger.getLogger(Unzip.class);
 	
 	//Zip Buffer
-	private final byte[] buffer = new byte[ 0xFFFF ]; 
+	//private final byte[] buffer = new byte[ 0xFFFF ]; 
 	
 	public InputStream extractFile(String source, String fileOO /* Open Office Datei z.B. content.xml */) throws OO2CADException
 	{
