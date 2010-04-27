@@ -13,7 +13,7 @@ public class EnhancedGeometryConverter
 		//Center X -> X wert setzen
 		cadEllipse.setCenterX(ellipse.getX() + (ellipse.getWidth() / 2));
 		//Center Y -> Y wert setzen
-		cadEllipse.setCenterY(ellipse.getY() + (ellipse.getHeight() / 2));
+		cadEllipse.setCenterY(ellipse.getY() - (ellipse.getHeight() / 2));
 		ellipseArray[0] = cadEllipse;
 		return ellipseArray;
 	}
