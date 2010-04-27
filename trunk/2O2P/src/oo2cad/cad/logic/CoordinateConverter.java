@@ -77,7 +77,7 @@ public class CoordinateConverter
 	private void setAvancedRelativeValues(AdvancedShape shape)
 	{
 		shape.setX((Math.abs(xReference - shape.getX()) + offSetX) * unit);
-		shape.setY((Math.abs(yReference - shape.getHeight()) + offSetY) * unit);
+		shape.setY((Math.abs(yReference - shape.getY()) + offSetY) * unit);
 		shape.setWidth(shape.getWidth() * unit);
 		shape.setHeight(shape.getHeight() * unit);
 	}
