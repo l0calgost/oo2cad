@@ -48,8 +48,7 @@ public class Config {
 				
 				stream.close();
 			}
-			catch (IOException e)
-			{
+			catch (Exception e) {
 				log.error("Fehler! Properties-Datei 'config.properties' konnte nicht gefunden werden!");
 				throw new OO2CADException(OO2CADExceptionConstants.CONFIG_ERROR);
 			}
