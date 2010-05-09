@@ -1,6 +1,7 @@
 package oo2cad;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Vector;
 
 import oo2cad.cad.logic.CadHandler;
@@ -80,7 +81,7 @@ public class OO2CAD {
 			e.printStackTrace();
 		}
 		
-		log.info("CAD-Datei wurde erfolgreich erstellt");
+		log.info("CAD-Datei wurde erfolgreich am '" + new Date(System.currentTimeMillis()) +"' erstellt");
 		System.out.println("CAD-Code wurde erfolgreich erstellt!");
 	}
 }
