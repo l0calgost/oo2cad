@@ -34,7 +34,7 @@ public class OO2CADGuiFileFilter extends FileFilter
 		}
 		else 
 		{
-			return "PictureByPc(*.vec)";
+			return "PicturesByPc(*.vec)";
 		}
 		
 	}
