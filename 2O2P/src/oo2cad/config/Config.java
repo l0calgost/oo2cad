@@ -1,6 +1,5 @@
 package oo2cad.config;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -38,12 +37,9 @@ public class Config {
 
 		setProperties(new Properties());
 
-		
-			InputStream stream = Config.class
-					.getResourceAsStream("../../config.properties");
-
 			try
 			{
+				InputStream stream = ClassLoader.getSystemResource("config.properties").openStream();
 				properties.load(stream);
 				
 				stream.close();
