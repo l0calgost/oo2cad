@@ -80,8 +80,5 @@ public class OO2CAD {
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
-		
-		log.info("CAD-Datei wurde erfolgreich am '" + new Date(System.currentTimeMillis()) +"' erstellt");
-		System.out.println("CAD-Code wurde erfolgreich erstellt!");
 	}
 }
