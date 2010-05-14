@@ -1,45 +1,46 @@
 <?eclipse.ant.import?>
 <project default="init">
-  <property file="build-proj.properties"/>
-  <import file="./build.xml"/>
-  <target name="createjar" description="Create a jar file of the main app">
-    <jar destfile="../../deploy/2O2CAD/${jarname}-${version}.jar" index="yes">
-      <fileset dir="./${basedir}">
-      	<include name="**/oo2cad/**"/>
-      	<exclude name="**/src/**"/>
-      	<include name="**/lib/**"/>
-      	<include name="**/icons/**"/>
-      	
-      </fileset>
-      <manifest>
-        <section name="${basepackage}">
-          <attribute name="Implementation-Title" value="${implement-title}"/>
-          <attribute name="Implementation-Version" value="${version} ${DSTAMP}"/>
-          <attribute name="Implementation-Vendor"
-                     value="Tobias Schug, Manuel Ahrens"/>
-        	
-        </section>
-      	<attribute name="Main-Class" value="${basepackage}.OO2CAD"/>
-      </manifest>
-    </jar>
-  </target>
-  <target name="__deploy" depends="clean,build-project,createjar"/>
-  <target name="_javadocs">
-    <javadoc packagenames="${basepackage}.*" sourcepath="src"
-             excludepackagenames="" defaultexcludes="yes"
-             destdir="../deploy/${implement-title}/${pvcs-label}/docs/api"
-             author="true" version="true" use="true"
-             windowtitle="${implement-title} ${pvcs-label}">
-      <doctitle>
-        <![CDATA[<h1>${implement-title} ${pvcs-label}</h1>]]>
+	<property file="build-proj.properties" />
+	<import file="./build.xml" />
+	<target name="createjar" description="Create a jar file of the main app">
+		<jar destfile="${buildPath}${jarname}-${version}.jar" index="yes">
+			
+			<fileset dir="./${output.dir}">
+				<include name="**/oo2cad/**" />		
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.dtd"/>
+			</fileset>
+			<fileset dir="${basedir}">
+				<include name="**/icons/**"/>
+			</fileset>
+			<zipfileset src="${lib.dir}/${lib.log4J}" includes="**/*.class" />
+			<zipfileset src="${lib.dir}/${lib.batik.parser}" includes="**/*.class" />
+			<zipfileset src="${lib.dir}/${lib.batik.util}" includes="**/*.class" />
+			<manifest>
+				<section name="${basepackage}">
+					<attribute name="Implementation-Title" value="${implement-title}" />
+					<attribute name="Implementation-Version" value="${version}" />
+					<attribute name="Implementation-Vendor" value="Tobias Schug, Manuel Ahrens" />
+
+				</section>
+				<attribute name="Main-Class" value="${basepackage}.OO2CAD" />
+				<attribute name="Class-Path" value="." />
+			</manifest>
+		</jar>
+	</target>
+	<target name="__deploy" depends="clean,build-project,createjar" />
+	<target name="_javadocs">
+		<javadoc packagenames="${basepackage}.*" sourcepath="src" excludepackagenames="" defaultexcludes="yes" destdir="../deploy/${implement-title}/${pvcs-label}/docs/api" author="true" version="true" use="true" windowtitle="${implement-title} ${pvcs-label}">
+			<doctitle>
+				<![CDATA[<h1>${implement-title} ${pvcs-label}</h1>]]>
       </doctitle>
-      <bottom>
-        <![CDATA[<i>Copyright &#169; Schug, Tobias;Ahrens, Manuel.</i>]]>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; Schug, Tobias;Ahrens, Manuel.</i>]]>
       </bottom>
-      <tag name="todo" scope="all" description="To do:"/>
-      <link offline="true" href="http://java.sun.com/j2se/1.5.0/docs/api/"
-            packagelistloc="C:\tmp"/>
-      <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
-    </javadoc>
-  </target>
+	<tag name="todo" scope="all" description="To do:" />
+	<link offline="true" href="http://java.sun.com/j2se/1.5.0/docs/api/" packagelistloc="C:\tmp" />
+	<link href="http://developer.java.sun.com/developer/products/xml/docs/api/" />
+</javadoc>
+</target>
 </project>
