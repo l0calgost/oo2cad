@@ -3,6 +3,7 @@ package oo2cad.cad.logic;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 import oo2cad.cad.constants.CadConstants;
 import oo2cad.cad.objects.CadBaseObject;
@@ -80,7 +81,7 @@ public class CadCreator
 			bw.flush();
 			bw.close();
 			
-			log.info("CAD- Datei wurde erstellt!");
+			log.info("CAD-Datei wurde erfolgreich am '" + new Date(System.currentTimeMillis()) +"' erstellt");
 			
 		} 
 		catch (IOException e)
