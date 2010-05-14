@@ -3,24 +3,19 @@ package oo2cad.gui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.MaskFormatter;
 
 import oo2cad.config.Config;
@@ -110,13 +105,13 @@ public class OO2CADGui extends JFrame
 		gbc.insets = new Insets(2, 2, 2, 2);
 		
 		//Programm Icons		
-		Icon iconAdd = new ImageIcon(System.getProperty("user.dir") + "\\icons\\folder_add.png");///2o2cad/src/icons/folder_add.png
-		Icon iconFind = new ImageIcon(System.getProperty("user.dir") + "\\icons\\folder_add.png");
-		Icon iconAccept = new ImageIcon(System.getProperty("user.dir") + "\\icons\\accept.png");		
-		Icon iconStop = new ImageIcon(System.getProperty("user.dir") + "\\icons\\stop.png");
+		Icon iconAdd = getImageIcon("folder_add.png");///2o2cad/src/icons/folder_add.png
+		Icon iconFind = getImageIcon("folder_add.png");
+		Icon iconAccept = getImageIcon("accept.png");		
+		Icon iconStop = getImageIcon("stop.png");
 		
 		//Previw Picture
-		Icon preview = new ImageIcon(System.getProperty("user.dir") + "\\icons\\Preview.png");
+		Icon preview = getImageIcon("Preview.png");
 				
 		//Source und Dest
 		sourcePathLabel = new JLabel("Source path:");
@@ -244,7 +239,22 @@ public class OO2CADGui extends JFrame
 		
 		return gbc;
 	}
+	
+	private ImageIcon getImageIcon(String iconName)
+	{
+		ImageIcon icon = null;
+		URL url = ClassLoader.getSystemResource("icons/" + iconName);
 		
+		if(url != null)
+		{
+			icon = new ImageIcon(url);
+		}
+		else 
+		{
+			icon = new ImageIcon(System.getProperty("user.dir") + "/icons/" + iconName);
+		}
+		return icon;
+	}
 	public void setPreviewPictureImage(Icon image) {
 		this.previewPicture.setIcon(image);
 	}
