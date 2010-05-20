@@ -84,7 +84,7 @@ public class OO2CADGuiActionHandler implements ActionListener
 			//OpenFile Dialog
 			JFileChooser jfDest = new JFileChooser();
 			jfDest.setDialogType(JFileChooser.SAVE_DIALOG);
-			jfDest.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			jfDest.setFileSelectionMode(JFileChooser.FILES_ONLY);
 						
 			File file = new File(gui.getSourcePathTextField().getText());
 			jfDest.setCurrentDirectory(file);
